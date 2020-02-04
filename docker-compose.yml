@@ -5,12 +5,12 @@ services:
     external_links:
       - mysql:db
     volumes:
-      - ./app:/app
+      - ./:/app
     ports:
       - "8001:8000"
     networks:
       - backend
-    command: bash -c "mod_wsgi-express start-server --reload-on-changes --working-directory /app/foo /app/foo/foo/wsgi.py"
+    command: bash -c "python /app/foo/manage.py makemigrations &&mod_wsgi-express start-server --reload-on-changes --working-directory /app/foo /app/foo/foo/wsgi.py"
 
 networks:
   backend:
