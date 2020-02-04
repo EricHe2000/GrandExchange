@@ -10,7 +10,7 @@ services:
       - "8001:8000"
     networks:
       - backend
-    command: bash -c "python /app/foo/manage.py makemigrations &&mod_wsgi-express start-server --reload-on-changes --working-directory /app/foo /app/foo/foo/wsgi.py"
+    command: bash -c "python /app/grandExchange/manage.py makemigrations && python /app/grandExchange/manage.py migrate && mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange /app/grandExchange/mysite/wsgi.py"
 
 networks:
   backend:
