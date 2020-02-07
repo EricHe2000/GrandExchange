@@ -1,10 +1,15 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 
 def homeView(request):
 	return render(request, 'home.html')
 
 def createUser(request):
-	return render(request,'test.html')
+	comments = [
+		{'name' : 'Yang Tang', 'email': '@yang.com', 'age':'20','gender':'Male','interests': ["a"]},
+	]
+	return JsonResponse({'comments': comments})
+
 
 def createItem(request):
 	return render(request,'test.html')
