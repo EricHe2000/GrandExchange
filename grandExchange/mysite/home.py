@@ -1,21 +1,22 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from .models import User, Item
+from django.core import serializers
 
 def homeView(request):
 	return render(request, 'home.html')
 
 def createUser(request):
-	comments = [
-		{'name' : 'Yang Tang', 'email': '@yang.com', 'age':'20','gender':'Male','interests': ["a"]},
-	]
-	return JsonResponse({'comments': comments})
+	return render(request, 'test.html')
 
 
 def createItem(request):
 	return render(request,'test.html')
 
-def getUser(request):
-	return render(request,'test.html')
+def getUser(request, userid):
+	users = User.objects.all().filter(pk=userid).values()
+	users_list = list(users)
+	return JsonResponse(users_list, safe=False)
 
 def getItem(request):
 	return render(request,'test.html')

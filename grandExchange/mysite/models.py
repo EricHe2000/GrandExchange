@@ -16,7 +16,5 @@ class User(models.Model):
     email = models.CharField(max_length=50)
     age = models.DecimalField(max_digits=3, decimal_places=0)
     gender = models.CharField(max_length=100)
-    interests = []
-
 
 

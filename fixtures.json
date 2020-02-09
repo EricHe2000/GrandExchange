@@ -1,0 +1,52 @@
+[
+  {
+    "model": "mysite.User",
+    "pk": 1,
+    "fields": {
+      "name": "John",
+      "email": "Lennon",
+      "age": 8,
+      "gender": "male"
+    }
+  },
+  {
+    "model": "mysite.User",
+    "pk": 2,
+    "fields": {
+      "name": "Richard",
+      "email": "King",
+      "age": 22,
+      "gender": "male"
+    }
+  },
+  {
+    "model": "mysite.User",
+    "pk": 3,
+    "fields": {
+      "name": "Sara",
+      "email": "Gustofson",
+      "age": 20,
+      "gender": "female"
+    }
+  },
+  {
+    "model": "mysite.User",
+    "pk": 4,
+    "fields": {
+      "name": "Dustin",
+      "email": "Bieber",
+      "age": 21,
+      "gender": "male"
+    }
+  },
+  {
+    "model": "mysite.User",
+    "pk": 5,
+    "fields": {
+      "name": "Stacy's",
+      "email": "Mom",
+      "age": 50,
+      "gender": "female"
+    }
+  }
+]
