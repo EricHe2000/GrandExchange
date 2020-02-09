@@ -1,4 +1,25 @@
 [
+  { "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "user1",
+            "password": "password"
+        }
+    },
+  { "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "username": "user2",
+            "password": "password2"
+        }
+    },
+  { "model": "auth.user",
+        "pk": 3,
+        "fields": {
+            "username": "user3",
+            "password": "password3"
+        }
+    },
   {
     "model": "mysite.User",
     "pk": 1,
@@ -47,6 +68,39 @@
       "email": "Mom",
       "age": 50,
       "gender": "female"
+    }
+  },
+    {
+    "model": "mysite.Item",
+    "pk": 1,
+    "fields": {
+      "sold": "False",
+      "post_date": "2020-01-20",
+      "title": "cool item",
+      "description": "eyyy tru",
+      "price": 76.2
+    }
+  },
+  {
+    "model": "mysite.Item",
+    "pk": 2,
+    "fields": {
+      "sold": "True",
+      "post_date": "2020-02-01",
+      "title": "AWESOME ITEM",
+      "description": "very cheap",
+      "price": 9999.99
+    }
+  },
+  {
+    "model": "mysite.Item",
+    "pk": 3,
+    "fields": {
+      "sold": "False",
+      "post_date": "2020-01-20",
+      "title": "something special :)))",
+      "description": "xd",
+      "price": 0.01
     }
   }
 ]
