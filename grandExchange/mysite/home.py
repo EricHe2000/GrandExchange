@@ -52,10 +52,18 @@ def updateItem(request):
 
 
 def deleteUser(request, userid):
-	users = User.objects.all().filter(pk=userid).delete()
-	return HttpResponse("Your user has been deleted")
+	user = User.objects.all().filter(pk=userid)
+	if user.exists():
+		user.delete()
+		return JsonResponse({'Success': 'Your user has been deleted.'})
+	else:
+		return JsonResponse({'Error': 'User either doesn\'t exist or has already been deleted.'})
 
 
 def deleteItem(request, itemid):
-	items = Item.objects.all().filter(pk=itemid).delete()
-	return HttpResponse("Your item has been deleted")
+	item = Item.objects.all().filter(pk=itemid)
+	if item != None:
+		item.delete()
+		return JsonResponse({'Success': 'Your item has been deleted.'})
+	else:
+		return JsonResponse({'Error': 'Item either doesn\'t exist or has already been deleted.'})
