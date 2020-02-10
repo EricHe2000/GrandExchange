@@ -4,7 +4,7 @@ from .models import User, Item
 class ItemForm(forms.ModelForm):
     class Meta:
         model= Item
-        fields= ["sold", "user", "title","description","price"]
+        fields= ["sold", "title","description","price"]
 
 class UserForm(forms.ModelForm):
     class Meta:

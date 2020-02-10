@@ -12,10 +12,13 @@ def homeView(request):
 def createUser(request):
 	if request.method == 'POST':
 		form= UserForm(request.POST)
-		form.save()
-		return JsonResponse({'Message':'Post request'})
+		if form.is_valid():
+			form.save()
+		users = User.objects.all().filter(pk=User.objects.all().count()).values()
+		users_list = list(users)
+		return JsonResponse(users_list, safe=False)
 	else:
-		return JsonResponse({'Message':'No Post request'})
+		return JsonResponse({'Error': 'No Post request, try again.'})
 
 @csrf_exempt
 def createItem(request):
@@ -23,9 +26,11 @@ def createItem(request):
 		form= ItemForm(request.POST)
 		if form.is_valid():
 			form.save()
-		return JsonResponse({'Message':'Post request'})
+		items = Item.objects.all().filter(pk=Item.objects.all().count()).values()
+		items_list = list(items)
+		return JsonResponse(items_list, safe=False)
 	else:
-		return JsonResponse({'Message':'No Post request'})
+		return JsonResponse({'Error': 'No Post request, try again.'})
 
 def getUser(request, userid):
 	users = User.objects.all().filter(pk=userid).values()
