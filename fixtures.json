@@ -75,7 +75,6 @@
     "pk": 1,
     "fields": {
       "sold": "False",
-      "post_date": "2020-01-20",
       "title": "cool item",
       "description": "eyyy tru",
       "price": 76.2
@@ -86,7 +85,6 @@
     "pk": 2,
     "fields": {
       "sold": "True",
-      "post_date": "2020-02-01",
       "title": "AWESOME ITEM",
       "description": "very cheap",
       "price": 9999.99
@@ -97,7 +95,6 @@
     "pk": 3,
     "fields": {
       "sold": "False",
-      "post_date": "2020-01-20",
       "title": "something special :)))",
       "description": "xd",
       "price": 0.01

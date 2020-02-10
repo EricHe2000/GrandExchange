@@ -2,16 +2,30 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from .models import User, Item
 from django.core import serializers
+from .forms import UserForm, ItemForm
+from django.views.decorators.csrf import csrf_exempt
 
 def homeView(request):
 	return render(request, 'home.html')
 
+@csrf_exempt
 def createUser(request):
-	return render(request, 'test.html')
+	if request.method == 'POST':
+		form= UserForm(request.POST)
+		form.save()
+		return JsonResponse({'Message':'Post request'})
+	else:
+		return JsonResponse({'Message':'No Post request'})
 
-
+@csrf_exempt
 def createItem(request):
-	return render(request,'test.html')
+	if request.method == 'POST':
+		form= ItemForm(request.POST)
+		if form.is_valid():
+			form.save()
+		return JsonResponse({'Message':'Post request'})
+	else:
+		return JsonResponse({'Message':'No Post request'})
 
 def getUser(request, userid):
 	users = User.objects.all().filter(pk=userid).values()
