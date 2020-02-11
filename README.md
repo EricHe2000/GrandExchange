@@ -12,16 +12,16 @@ GET Request:
 
 api/v1/user/<int:userid>/
 
-api/v1/item/<int:itemid>
+api/v1/item/<int:itemid>/
 
 UPDATE:
 
-api/v1/user/<int:userid>/update
+api/v1/user/<int:userid>/update/
 
-api/v1/item/<int:itemid>/update
+api/v1/item/<int:itemid>/update/
 
 DELETE:
 
-api/v1/user/<int:userid>/delete
+api/v1/user/<int:userid>/delete/
 
-api/v1/item/<int:itemid>/delete
+api/v1/item/<int:itemid>/delete/
