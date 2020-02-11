@@ -11,7 +11,7 @@ services:
       - "8001:8000"
     networks:
       - backend
-    command: bash -c "python /app/grandExchange/manage.py makemigrations mysite && python /app/grandExchange/manage.py migrate --run-syncdb && python /app/grandExchange/manage.py dumpdata >fixtures2.json&& python /app/grandExchange/manage.py loaddata fixtures.json && mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange /app/grandExchange/mysite/wsgi.py"
+    command: bash -c "python /app/grandExchange/manage.py makemigrations mysite && python /app/grandExchange/manage.py migrate --run-syncdb && python /app/grandExchange/manage.py loaddata fixtures.json && mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange /app/grandExchange/mysite/wsgi.py"
 
 networks:
   backend:
