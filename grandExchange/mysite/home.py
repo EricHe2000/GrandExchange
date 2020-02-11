@@ -33,22 +33,57 @@ def createItem(request):
 		return JsonResponse({'Error': 'No Post request, try again.'})
 
 def getUser(request, userid):
-	users = User.objects.all().filter(pk=userid).values()
-	users_list = list(users)
+	users = User.objects.all().filter(pk=userid)
+	users_list = list(users.values())
 	return JsonResponse(users_list, safe=False)
 
 def getItem(request, itemid):
-	items = Item.objects.all().filter(pk=itemid).values()
-	items_list = list(items)
+	items = Item.objects.all().filter(pk=itemid)
+	items_list = list(items.values())
 	return JsonResponse(items_list, safe=False)
 
+@csrf_exempt
+def updateUser(request, userid):
 
-def updateUser(request):
-	return render(request,'test.html')
+	if request.method == 'POST':
+		users = User.objects.all().filter(pk=userid)
 
+		if request.POST.get('name') != None:
+			users.update(name=request.POST.get('name'))
 
-def updateItem(request):
-	return render(request,'test.html')
+		if request.POST.get('email') != None:
+			users.update(email=request.POST.get('email'))
+		if request.POST.get('age') != None:
+			users.update(age=request.POST.get('age'))
+		if request.POST.get('gender') != None:
+			users.update(gender=request.POST.get('gender'))
+
+		users_list = list(users.values())
+		return JsonResponse(users_list, safe=False)
+
+	else:
+		return JsonResponse({'Error': 'Couldn\'t update'})
+
+@csrf_exempt
+def updateItem(request, itemid):
+	if request.method == 'POST':
+		items = Item.objects.all().filter(pk=itemid)
+
+		if request.POST.get('sold') != None:
+			items.update(sold=request.POST.get('sold'))
+		if request.POST.get('title') != None:
+			items.update(title=request.POST.get('title'))
+		if request.POST.get('description') != None:
+			items.update(description=request.POST.get('description'))
+		if request.POST.get('price') != None:
+			items.update(price=request.POST.get('price'))
+
+		items_list = list(items.values())
+
+		return JsonResponse(items_list, safe=False)
+
+	else:
+		return JsonResponse({'Error': 'Couldn\'t update'})
 
 
 def deleteUser(request, userid):
