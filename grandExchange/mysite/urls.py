@@ -1,4 +1,4 @@
-"""foo URL Configuration
+"""mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -35,7 +35,7 @@ urlpatterns = [
     path('api/v1/item/<int:itemid>/update', home.updateItem),
 
     path('api/v1/user/<int:userid>/delete', home.deleteUser),
-    path('api/v1/item/<int:itemid>/delete', home.deleteItem)
+    path('api/v1/item/<int:itemid>/delete', home.deleteItem),
 
 ]
 

@@ -33,32 +33,35 @@ def createItem(request):
 		return JsonResponse({'Error': 'No Post request, try again.'})
 
 def getUser(request, userid):
-	users = User.objects.all().filter(pk=userid)
-	users_list = list(users.values())
-	return JsonResponse(users_list, safe=False)
+	user = User.objects.all().filter(pk=userid)
+	if user.exists():
+		user_list = list(user.values())
+		return JsonResponse(user_list, safe=False)	
+	else:
+		return JsonResponse({'Error': 'User does not exist'}) 
 
 def getItem(request, itemid):
-	items = Item.objects.all().filter(pk=itemid)
-	items_list = list(items.values())
-	return JsonResponse(items_list, safe=False)
-
+	item = Item.objects.all().filter(pk=itemid)
+	if item.exists():
+		item_list = list(item.values())
+		return JsonResponse(item_list, safe=False)
+	else:
+		return JsonResponse({'Error': 'Item does not exist'}) 
 @csrf_exempt
 def updateUser(request, userid):
 
 	if request.method == 'POST':
-		users = User.objects.all().filter(pk=userid)
-
+		user = User.objects.all().filter(pk=userid)
 		if request.POST.get('name') != None:
-			users.update(name=request.POST.get('name'))
-
+			user.update(name=request.POST.get('name'))
 		if request.POST.get('email') != None:
-			users.update(email=request.POST.get('email'))
+			user.update(email=request.POST.get('email'))
 		if request.POST.get('age') != None:
-			users.update(age=request.POST.get('age'))
+			user.update(age=request.POST.get('age'))
 		if request.POST.get('gender') != None:
-			users.update(gender=request.POST.get('gender'))
+			user.update(gender=request.POST.get('gender'))
 
-		users_list = list(users.values())
+		users_list = list(user.values())
 		return JsonResponse(users_list, safe=False)
 
 	else:
@@ -67,18 +70,18 @@ def updateUser(request, userid):
 @csrf_exempt
 def updateItem(request, itemid):
 	if request.method == 'POST':
-		items = Item.objects.all().filter(pk=itemid)
+		item = Item.objects.all().filter(pk=itemid)
 
 		if request.POST.get('sold') != None:
-			items.update(sold=request.POST.get('sold'))
+			item.update(sold=request.POST.get('sold'))
 		if request.POST.get('title') != None:
-			items.update(title=request.POST.get('title'))
+			item.update(title=request.POST.get('title'))
 		if request.POST.get('description') != None:
-			items.update(description=request.POST.get('description'))
+			item.update(description=request.POST.get('description'))
 		if request.POST.get('price') != None:
-			items.update(price=request.POST.get('price'))
+			item.update(price=request.POST.get('price'))
 
-		items_list = list(items.values())
+		items_list = list(item.values())
 
 		return JsonResponse(items_list, safe=False)
 
