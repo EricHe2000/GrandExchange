@@ -2,16 +2,43 @@ version: "3"
 services:
   models:
     image: tp33/django
+    container_name: models
     external_links:
       - mysql:db
-
     volumes:
       - ./:/app
     ports:
       - "8001:8000"
     networks:
       - backend
+      - service_mesh
     command: bash -c "python /app/grandExchange/manage.py makemigrations mysite && python /app/grandExchange/manage.py migrate --run-syncdb && python /app/grandExchange/manage.py loaddata fixtures.json && mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange /app/grandExchange/mysite/wsgi.py"
+
+  exp:
+    image: tp33/django
+    container_name: exp
+    networks:
+      - service_mesh
+      - public
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./:/app
+    command: bash -c "mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange /app/grandExchange/mysite/wsgi.py"
+
+  web:
+    image: tp33/django
+    container_name: web
+    networks:
+      - public
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    command: bash -c "mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange /app/grandExchange/mysite/wsgi.py"
 
 networks:
   backend:
+  service_mesh:
+  public:
+  
