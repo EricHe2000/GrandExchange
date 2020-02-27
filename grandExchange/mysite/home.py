@@ -5,9 +5,6 @@ from django.core import serializers
 from .forms import UserForm, ItemForm
 from django.views.decorators.csrf import csrf_exempt
 
-def homeView(request):
-	return render(request, 'home.html')
-
 @csrf_exempt
 def createUser(request):
 	if request.method == 'POST':

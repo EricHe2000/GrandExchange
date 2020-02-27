@@ -23,7 +23,6 @@ from . import home
 # 	return render(request, 'home.html')
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',home.homeView),
 
     path('api/v1/user/create/', home.createUser),
     path('api/v1/item/create/', home.createItem),
