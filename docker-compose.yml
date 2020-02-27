@@ -24,7 +24,7 @@ services:
       - "8002:8000"
     volumes:
       - ./:/app
-    command: bash -c "mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange /app/grandExchange/mysite/wsgi.py"
+    command: bash -c "mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange_exp /app/grandExchange_exp/grandExchange_exp/wsgi.py"
 
   web:
     image: tp33/django
@@ -35,10 +35,9 @@ services:
       - "8000:8000"
     volumes:
       - ./:/app
-    command: bash -c "mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange /app/grandExchange/mysite/wsgi.py"
+    command: bash -c "mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange_web /app/grandExchange_web/grandExchange_web/wsgi.py"
 
 networks:
   backend:
   service_mesh:
   public:
-  
