@@ -19,5 +19,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='home')
+    path('', views.index, name='home'),
+    path('api/v1/item/getLowestPricedItemPK', views.getLowestPricedItemPK),
+
 ]

@@ -32,6 +32,8 @@ urlpatterns = [
 
     path('api/v1/user/<int:userid>/update', home.updateUser),
     path('api/v1/item/<int:itemid>/update', home.updateItem),
+    
+    path('api/v1/item/getLowestPricedItem', home.getLowestPricedItem),
 
     path('api/v1/user/<int:userid>/delete', home.deleteUser),
     path('api/v1/item/<int:itemid>/delete', home.deleteItem),

@@ -102,3 +102,21 @@ def deleteItem(request, itemid):
 		return JsonResponse({'Success': 'Your item has been deleted.'})
 	else:
 		return JsonResponse({'Error': 'Item either doesn\'t exist or has already been deleted.'})
+
+def getLowestPricedItem(request):
+    response = {}
+    response_data = {}
+
+    try:
+        #Gets lowest priced item
+        item = Item.objects.filter().latest('price')
+        response_data['pk'] = item.pk
+        response_data['title'] = item.title
+        response_data['description'] = item.description
+        response_data['price'] = item.price
+        response_data['sold'] = item.sold
+    except:
+        return JsonResponse({'Error': 'Lowest priced item not found'})
+
+    response['result'] = response_data
+    return JsonResponse(response)
