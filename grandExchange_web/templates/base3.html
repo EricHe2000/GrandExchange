@@ -1,5 +1,4 @@
 {% load static %}
-{% load socialaccount %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,10 +23,9 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="/about">About</a>
-              <a class="nav-item nav-link" href="{% url 'ride-list' %}">Ride List</a>
+    
 
             </div>
-            <div class="navbar-brand navbar-brand-centered"><img src={% static 'rideapp/logo.png' %}  style="height: 5vh" /></div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
             </div>
