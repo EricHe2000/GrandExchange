@@ -35,7 +35,7 @@ services:
       - "8000:8000"
     volumes:
       - ./:/app
-    command: bash -c "mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange_web /app/grandExchange_web/grandExchange_web/wsgi.py"
+    command: bash -c "python /app/grandExchange_web/manage.py makemigrations web && python /app/grandExchange_web/manage.py migrate --run-syncdb && mod_wsgi-express start-server --reload-on-changes --working-directory /app/grandExchange_web /app/grandExchange_web/grandExchange_web/wsgi.py"
 
 networks:
   backend:
