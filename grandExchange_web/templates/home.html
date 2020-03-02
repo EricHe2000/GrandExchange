@@ -67,20 +67,21 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- Image header -->
   <div class="w3-display-container w3-container">
-    <h1>Hottest Items</h1> 
+    <h1>Hottest Items </h1> 
   </div>
   <!-- Product grid -->
+  {% for item in resp %}
   <div class="w3-row w3-grayscale">
     <div class="w3-col l3 s6">
       <div class="w3-container">
         <img src="/w3images/jeans1.jpg" style="width:100%">
-        <a href="detail">cool item<br><b>$24.99</b></a>
+        <a href="detail">{{item.title}}<br><b>$24.99</b></a>
       </div>
       <div class="w3-container">
         <p>Mega Ripped Jeans<br><b>$19.99</b></p>
       </div>
     </div>
-
+  {% endfor%}
     <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">

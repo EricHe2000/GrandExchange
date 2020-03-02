@@ -15,3 +15,12 @@ def getItem(request):
     #dict = {"sold":results[0], 'title': 'tru', 'description' : 'yeye', 'price' : 6.5, 'id':4}
 
     return JsonResponse(results)
+
+def getHottestList(request):
+    req = urllib.request.Request('http://models:8000/api/v1/item/hottest/')
+    resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+    results = json.loads(resp_json)
+
+    #dict = {"sold":results[0], 'title': 'tru', 'description' : 'yeye', 'price' : 6.5, 'id':4}
+
+    return JsonResponse(results)

@@ -45,6 +45,13 @@ def getItem(request, itemid):
 	else:
 		return JsonResponse({'Error': 'Item does not exist'})
 
+def getHottestItem(request):
+	items = Item.objects.all().order_by('numberBought')
+	if items.exists():
+		item_list = list(items.values())
+		return JsonResponse(item_list, safe=False)
+	else:
+		return JsonResponse({'Error': 'Item does not exist'})
 
 @csrf_exempt
 def updateUser(request, userid):

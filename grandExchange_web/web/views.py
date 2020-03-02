@@ -6,11 +6,10 @@ import logging
 
 
 def index(request):
-    #req = urllib.request.Request('http://placeholder.com/v1/api/posts/1')
-    #resp_json = urllib.request.urlopen(req).read().decode('utf-8')
-    #resp = json.loads(resp_json)
-
-    return render(request, 'home.html')
+    req = urllib.request.Request('http://exp:8000/api/v1/item/hottestList')
+    resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+    resp = json.loads(resp_json)
+    return render(request, 'home.html',context=resp)
 
 def detail(request):
 
