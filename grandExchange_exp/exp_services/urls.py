@@ -1,4 +1,4 @@
-"""grandExchange_web URL Configuration
+"""grandExchange_exp URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -19,5 +19,5 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='home')
+    path('api/v1/getItem/', views.getItem)
 ]

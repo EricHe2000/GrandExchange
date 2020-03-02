@@ -25,7 +25,7 @@ SECRET_KEY = '(so)^leko*j%#l4+p$z@twf+&ub+u@t-qmjnf45a7=jhnrt0_%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['exp', 'localhost']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'exp_services'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'grandExchange_exp.urls'
+ROOT_URLCONF = 'exp_services.urls'
 
 TEMPLATES = [
     {
@@ -75,11 +76,13 @@ WSGI_APPLICATION = 'grandExchange_exp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cs4501',
+        'USER': 'www',
+        'PASSWORD': '$3cureUS',
+        'HOST': 'db',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

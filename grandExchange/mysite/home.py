@@ -41,9 +41,11 @@ def getItem(request, itemid):
 	item = Item.objects.all().filter(pk=itemid)
 	if item.exists():
 		item_list = list(item.values())
-		return JsonResponse(item_list, safe=False)
+		return JsonResponse(item_list[0], safe=False)
 	else:
-		return JsonResponse({'Error': 'Item does not exist'}) 
+		return JsonResponse({'Error': 'Item does not exist'})
+
+
 @csrf_exempt
 def updateUser(request, userid):
 
