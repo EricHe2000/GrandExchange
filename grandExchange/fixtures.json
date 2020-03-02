@@ -102,5 +102,27 @@
       "price": 12,
       "numberBought": 2
     }
+  },
+  {
+    "model": "mysite.Item",
+    "pk": 4,
+    "fields": {
+      "sold": "False",
+      "title": "Pure Essence",
+      "description": "An uncharged Rune Stone of extra capability. Used in Runecrafting for training and production",
+      "price": 32,
+      "numberBought": 0
+    }
+  },
+  {
+    "model": "mysite.Item",
+    "pk": 5,
+    "fields": {
+      "sold": "False",
+      "title": "Yew logs",
+      "description": "Logs cut from a yew tree",
+      "price": 169,
+      "numberBought": 20
+    }
   }
 ]
