@@ -18,8 +18,8 @@ def detail(request):
 
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     resp = json.loads(resp_json)
-    print(resp)
-    return render(request, 'item.html')
+    #print(resp)
+    return render(request, 'item.html',context=resp)
 
 
 

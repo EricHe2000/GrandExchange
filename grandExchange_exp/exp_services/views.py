@@ -12,6 +12,6 @@ def getItem(request):
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     results = json.loads(resp_json)
 
-    dict = {"sold":False, 'title': 'tru', 'description' : 'yeye', 'price' : 6.5, 'id':4}
+    #dict = {"sold":results[0], 'title': 'tru', 'description' : 'yeye', 'price' : 6.5, 'id':4}
 
     return JsonResponse(results)
