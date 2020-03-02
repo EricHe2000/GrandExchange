@@ -20,6 +20,5 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/getItem/', views.getItem),
-    path('api/v1/item/hottestList', views.getHottestList)
-    
+    path('api/v1/item/hottestCheapestList', views.getHottestCheapestList),
 ]
