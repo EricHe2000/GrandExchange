@@ -75,9 +75,9 @@
     "pk": 1,
     "fields": {
       "sold": "False",
-      "title": "cool item",
-      "description": "eyyy tru",
-      "price": 76.2,
+      "title": "Earth Rune",
+      "description": "One of the four basic elemental runes. Used in Magic (9)",
+      "price": 16,
       "numberBought": 4
     }
   },
@@ -86,9 +86,9 @@
     "pk": 2,
     "fields": {
       "sold": "True",
-      "title": "AWESOME ITEM",
-      "description": "very cheap",
-      "price": 9999.99,
+      "title": "Rune Arrow",
+      "description": "Arrows with rune heads",
+      "price": 146,
       "numberBought": 3
     }
   },
@@ -97,9 +97,9 @@
     "pk": 3,
     "fields": {
       "sold": "False",
-      "title": "something special :)))",
-      "description": "xd",
-      "price": 0.01,
+      "title": "Feather",
+      "description": "Used for fly fishing",
+      "price": 12,
       "numberBought": 2
     }
   }
