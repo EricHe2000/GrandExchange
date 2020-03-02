@@ -17,10 +17,13 @@ def getItem(request):
     return JsonResponse(results)
 
 def getHottestList(request):
-    req = urllib.request.Request('http://models:8000/api/v1/item/hottest/')
+    req = urllib.request.Request('http://models:8000/api/v1/item/hottest')
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     results = json.loads(resp_json)
 
     #dict = {"sold":results[0], 'title': 'tru', 'description' : 'yeye', 'price' : 6.5, 'id':4}
-
-    return JsonResponse(results)
+    if len(results) > 2:
+        dict = {"first": results[0], "second": results[1],"third":results[2] }
+    else:
+        dict = {}
+    return JsonResponse(dict)
