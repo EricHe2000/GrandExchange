@@ -12,3 +12,6 @@ class CurrencyTestClass(TestCase):
     def dollar_in_home(self):
         response = self.client.get(reverse('home'))
         self.assertContains(response, '$')
+    def dollar_in_detail(self):
+        response = self.client.get(reverse('detail'))
+        self.assertContains(response, '$')
