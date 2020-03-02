@@ -43,7 +43,9 @@ def getItem(request, itemid):
 		item_list = list(item.values())
 		return JsonResponse(item_list, safe=False)
 	else:
-		return JsonResponse({'Error': 'Item does not exist'}) 
+		return JsonResponse({'Error': 'Item does not exist'})
+
+
 @csrf_exempt
 def updateUser(request, userid):
 
