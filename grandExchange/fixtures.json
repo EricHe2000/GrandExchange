@@ -77,7 +77,8 @@
       "sold": "False",
       "title": "cool item",
       "description": "eyyy tru",
-      "price": 76.2
+      "price": 76.2,
+      "numberBought": 4
     }
   },
   {
@@ -87,7 +88,8 @@
       "sold": "True",
       "title": "AWESOME ITEM",
       "description": "very cheap",
-      "price": 9999.99
+      "price": 9999.99,
+      "numberBought": 3
     }
   },
   {
@@ -97,7 +99,8 @@
       "sold": "False",
       "title": "something special :)))",
       "description": "xd",
-      "price": 0.01
+      "price": 0.01,
+      "numberBought": 2
     }
   }
 ]
