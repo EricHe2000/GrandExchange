@@ -5,9 +5,11 @@
 </head>
 <body>
 	<h1>test</h1>
-	{{dict}}
-	{% for item in dict %}
-		  <a href="/detail/{{ item.id }}/"><br><b>{{item.title}}</b></a>
+	{% for item in hot %}
+		  <a href="/detail/{{ item.id }}/"><br>This is a hot item <b>{{item.title}}</b></a>
 	{% endfor%}
+	{% for item in cheap %}
+	<a href="/detail/{{ item.id }}/"><br>This is a cheap item <b>{{item.title}}</b></a>
+{% endfor%}
 </body>
 </html>
