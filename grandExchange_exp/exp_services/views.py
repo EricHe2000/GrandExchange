@@ -6,9 +6,9 @@ import urllib.parse
 import json
 from django.http import JsonResponse, HttpResponse
 
-def getItem(request):
+def getItem(request, itemid):
 
-    req = urllib.request.Request('http://models:8000/api/v1/item/4/')
+    req = urllib.request.Request('http://models:8000/api/v1/item/' + str(itemid))
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     results = json.loads(resp_json)
 

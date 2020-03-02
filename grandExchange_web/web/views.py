@@ -11,9 +11,9 @@ def index(request):
     resp = json.loads(resp_json)
     return render(request, 'test.html',{'dict':resp})
 
-def detail(request):
+def detail(request, itemid):
 
-    req = urllib.request.Request('http://exp:8000/api/v1/getItem')
+    req = urllib.request.Request('http://exp:8000/api/v1/getItem/' + str(itemid))
 
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     resp = json.loads(resp_json)

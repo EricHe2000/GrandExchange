@@ -11,8 +11,8 @@
         <div class="col-6">
         <div class="card-body">
              <p class="card-text"> The {{ title }} is a {{ description }}</p>
-             <p class="card-text">that currently costs {{ field.price }}</p>
-            <p class="card-text"> and is currently sold? {{ field.sold }}</p>
+             <p class="card-text">that currently costs ${{ price }}</p>
+            <p class="card-text"> and is currently {% if sold %} being {% else %} not {% endif %} sold</p>
         </div>
         </div>
     </div>

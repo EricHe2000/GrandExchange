@@ -5,8 +5,8 @@
 </head>
 <body>
 	<h1>test</h1>
-	{% for item in dict %}
-		  <a href="detail"><br><b>{{item}}</b></a>
+	{% for key, item in dict.items %}
+		  <a href="detail/{{item.id}}" ><br><b>{{item.title}}</b></a>
 	{% endfor%}
 </body>
 </html>
