@@ -6,7 +6,7 @@ from .home import *
 import json
 
 class GetItemTestCase(TestCase):
-
+# Create your tests here.
     #loading our fixture for testing
     fixtures = ['fixtures.json']
 

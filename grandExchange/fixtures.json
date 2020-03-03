@@ -124,5 +124,38 @@
       "price": 169,
       "numberBought": 20
     }
+  },
+  {
+    "model": "mysite.Item",
+    "pk": 6,
+    "fields": {
+      "sold": "False",
+      "title": "Raw tuna",
+      "description": "I should try cooking this",
+      "price": 335,
+      "numberBought": 5
+    }
+  },
+  {
+    "model": "mysite.Item",
+    "pk": 7,
+    "fields": {
+      "sold": "False",
+      "title": "Magic Notepaper",
+      "description": "Use an item on this magical notepaper to make it noted and stackable",
+      "price": 1228,
+      "numberBought": 15
+    }
+  },
+  {
+    "model": "mysite.Item",
+    "pk": 8,
+    "fields": {
+      "sold": "False",
+      "title": "Rune scimitar",
+      "description": "A rune scimitar",
+      "price": 16800,
+      "numberBought": 31
+    }
   }
 ]
