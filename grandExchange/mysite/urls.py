@@ -24,19 +24,19 @@ from . import home
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('api/v1/user/create/', home.createUser),
-    path('api/v1/item/create/', home.createItem),
+    path('api/v1/user/create/', home.createUser, name='createUser'),
+    path('api/v1/item/create/', home.createItem, name='createItem'),
 
-    path('api/v1/user/<int:userid>/', home.getUser),
-    path('api/v1/item/<int:itemid>/', home.getItem),
+    path('api/v1/user/<int:userid>/', home.getUser, name='getUser'),
+    path('api/v1/item/<int:itemid>/', home.getItem, name='getItem'),
 
-    path('api/v1/user/<int:userid>/update', home.updateUser),
-    path('api/v1/item/<int:itemid>/update', home.updateItem),
+    path('api/v1/user/<int:userid>/update', home.updateUser, name='updateUser'),
+    path('api/v1/item/<int:itemid>/update', home.updateItem, name='updateItem'),
 
-    path('api/v1/user/<int:userid>/delete', home.deleteUser),
-    path('api/v1/item/<int:itemid>/delete', home.deleteItem),
+    path('api/v1/user/<int:userid>/delete', home.deleteUser, name='deleteUser'),
+    path('api/v1/item/<int:itemid>/delete', home.deleteItem, name='deleteItem'),
 
-    path('api/v1/item/hottest', home.getHottestItem),
-    path('api/v1/item/cheapest', home.getCheapestItem),
+    path('api/v1/item/hottest', home.getHottestItem, name='getHottestItem'),
+    path('api/v1/item/cheapest', home.getCheapestItem, name='getCheapestItem'),
 ]
 
