@@ -9,8 +9,14 @@ def index(request):
     req = urllib.request.Request('http://exp:8000/api/v1/item/hottestCheapestList')
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     d = json.loads(resp_json)
-    dictCheap = [d["Cheapest1"], d["Cheapest2"],d["Cheapest3"]]
-    dictHot = [d["Hottest1"], d["Hottest2"],d["Hottest3"]]
+    dictCheap = []
+    dictHot = []
+    for name in d.keys():
+        if "cheapest" in name.lower():
+            dictCheap.append(d[name])
+    for name in d.keys():
+        if "hottest" in name.lower():
+            dictHot.append(d[name])
     #resp_list = list(resp.values())
     return render(request, 'test.html',context = {'cheap':dictCheap,'hot':dictHot} )
 
