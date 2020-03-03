@@ -18,7 +18,7 @@ def index(request):
         if "hottest" in name.lower():
             dictHot.append(d[name])
     #resp_list = list(resp.values())
-    return render(request, 'test.html',context = {'cheap':dictCheap,'hot':dictHot} )
+    return render(request, 'landing.html',context = {'cheap':dictCheap,'hot':dictHot} )
 
 def detail(request,num=1):
 

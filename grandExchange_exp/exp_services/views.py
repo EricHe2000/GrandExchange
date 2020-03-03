@@ -27,7 +27,9 @@ def getHottestCheapestList(request):
 
     #dict = {"sold":results[0], 'title': 'tru', 'description' : 'yeye', 'price' : 6.5, 'id':4}
     if len(results) > 2:
-        dict = {"Hottest1": results[0],"Hottest2": results[1] ,"Hottest3": results[2], "Cheapest1": results2[0],"Cheapest2": results2[1],"Cheapest3": results2[2]}
+        dict = {"Hottest1": results[0],"Hottest2": results[1] ,"Hottest3": results[2],"Hottest4": results[3] ,"Cheapest1": results2[0],"Cheapest2": results2[1],"Cheapest3": results2[2],"Cheapest4": results2[3]}
     else:
         dict = {}
+
+    print(dict)
     return JsonResponse(dict)

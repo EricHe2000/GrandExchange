@@ -4,8 +4,7 @@ from django.test import Client
 from .models import Item
 
 # Create your tests here.
-def hottestTest(self):
-    items = Item.objects.all()
+
     
 
 
