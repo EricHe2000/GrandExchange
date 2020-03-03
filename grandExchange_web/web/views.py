@@ -14,11 +14,13 @@ def index(request):
     for name in d.keys():
         if "cheapest" in name.lower():
             dictCheap.append(d[name])
+
     for name in d.keys():
         if "hottest" in name.lower():
             dictHot.append(d[name])
-    #resp_list = list(resp.values())
-    return render(request, 'landing.html',context = {'cheap':dictCheap,'hot':dictHot} )
+                
+    #resp_list = list(resp.values()) sorted(a_list, key=lambda price: float(price['dep_price']))
+    return render(request, 'landing.html',context = {'cheap':sorted(dictCheap, key = lambda i: float(i['price'])),'hot':sorted(dictHot, key = lambda i: i['numberBought'],reverse=True)} )
 
 def detail(request,num=1):
 

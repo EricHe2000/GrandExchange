@@ -58,7 +58,7 @@
       <a href="#" class="btn btn-primary btn-lg">Lets get started!</a>
     </header>
 
-    <h1>Hottest Items</h1>
+    <h1>Hottest Items🔥</h1>
     <!-- Page Features -->
     <div class="row text-center">
         {% for item in hot %}
@@ -68,6 +68,8 @@
           <div class="card-body">
             <h4 class="card-title">{{item.title}}</h4>
             <p class="card-text">{{item.description}}</p>
+            <p class="card-text">Number Sold: {{item.numberBought}}</p>
+            <p class="card-text">Price: {{item.price}}</p>
           </div>
           <div class="card-footer">
             <a href="/detail/{{ item.id }}/" class="btn btn-primary">Find Out More!</a>
@@ -76,7 +78,7 @@
       </div>
       {% endfor%}
     </div>
-    <h1>Cheapest Items</h1>
+    <h1>Cheapest Items🤑</h1>
     <!-- Page Features -->
     <div class="row text-center">
         {% for item in cheap%}
@@ -86,6 +88,8 @@
           <div class="card-body">
             <h4 class="card-title">{{item.title}}</h4>
             <p class="card-text">{{item.description}}</p>
+            <p class="card-text">Price: {{item.price}}</p>
+            <p class="card-text">Number Sold: {{item.numberBought}}</p>
           </div>
           <div class="card-footer">
             <a href="/detail/{{ item.id }}/" class="btn btn-primary">Find Out More!</a>
