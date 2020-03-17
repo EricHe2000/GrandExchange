@@ -5,15 +5,21 @@ from django.core import serializers
 from .forms import UserForm, ItemForm
 from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 def createUser(request):
 	if request.method == 'POST':
-		form= UserForm(request.POST)
+		form = UserForm(data=request.POST)
 		if form.is_valid():
-			form.save()
-		users = User.objects.all().filter(pk=User.objects.all().count()).values()
-		users_list = list(users)
-		return JsonResponse(users_list, safe=False)
+
+			name = form.cleaned_data['name']
+			email = form.cleaned_data['email']
+			age = form.cleaned_data['age']
+			gender = form.cleaned_data['gender']
+
+			user = User(name,email,age,gender)
+			user.save()
+
+			return JsonResponse({'id': 'hello'})
 	else:
 		return JsonResponse({'Error': 'No Post request, try again.'})
 

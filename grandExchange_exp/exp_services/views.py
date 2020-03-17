@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 import urllib.request
@@ -33,3 +34,24 @@ def getHottestCheapestList(request):
 
     print(dict)
     return JsonResponse(dict)
+
+
+#change this csrf exempt thing when we get tokens to work
+@csrf_exempt
+def postUser(request):
+    name = request.POST.get('fname', None)
+    email = request.POST.get('lname', None)
+    age = request.POST.get('password', None)
+    gender = request.POST.get('gender', None)
+
+    data_setup = {'name': name, 'email': email, 'age': age, 'gender': gender}
+    data = urllib.parse.urlencode(data_setup).encode('utf-8')
+    req = urllib.request.Request('http://models:8000/api/v1/user/create', data)
+    resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+    results = json.loads(resp_json)
+
+    #add additional logic/model calls here if needed
+
+    return JsonResponse(results)
+
+

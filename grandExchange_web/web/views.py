@@ -3,6 +3,8 @@ import urllib.request
 import urllib.parse
 import json
 import logging
+from .forms import UserForm
+from django.http import HttpResponse
 
 
 def index(request):
@@ -29,6 +31,30 @@ def detail(request,num=1):
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     resp = json.loads(resp_json)
     return render(request, 'item.html',context = {'dict':resp})
+
+def createUser(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+
+            data = urllib.parse.urlencode(form.cleaned_data).encode('utf-8')
+
+            req = urllib.request.Request('http://exp:8000/api/v1/post/user', data)
+            resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+            resp = json.loads(resp_json)
+
+            return HttpResponse("User number " + str(resp['id']) + " has been successfully created.")
+        else:
+
+            return HttpResponse("please fix issues!")
+
+    else:
+        form = UserForm()
+
+    return render(request, 'createUser.html', {'form': form})
+
+
+
 
 
 

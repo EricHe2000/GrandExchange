@@ -53,53 +53,18 @@
 
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
-      <h1 class="display-3">Welcom to the GE</h1>
-      <p class="lead">The Grand Exchange (abbreviated as GE) is a trading system for players to buy and sell almost all tradeable items.</p>
-      <a href="/create/user/" class="btn btn-primary btn-lg">Create an Account now!</a>
-    </header>
+      <h1 class="display-4">Create a New Account</h1>
+      <p class="lead">Create a new account to be able to make buy and sell requests with your fellow Grand Exchange members.</p>
 
-    <h1>Hottest Items🔥</h1>
-    <!-- Page Features -->
-    <div class="row text-center">
-        {% for item in hot %}
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">{{item.title}}</h4>
-            <p class="card-text">{{item.description}}</p>
-            <p class="card-text">Number Sold: {{item.numberBought}}</p>
-            <p class="card-text">Price: {{item.price}}g</p>
-          </div>
-          <div class="card-footer">
-            <a href="/detail/{{ item.id }}/" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-      {% endfor%}
-    </div>
-    <h1>Cheapest Items🤑</h1>
-    <!-- Page Features -->
-    <div class="row text-center">
-        {% for item in cheap%}
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">{{item.title}}</h4>
-            <p class="card-text">{{item.description}}</p>
-            <p class="card-text">Price: {{item.price}}g</p>
-            <p class="card-text">Number Sold: {{item.numberBought}}</p>
-          </div>
-          <div class="card-footer">
-            <a href="/detail/{{ item.id }}/" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-      {% endfor%}
-    </div>
-    
-  <!-- /.container -->
+        <form action="/create/user/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="OK">
+        </form>
+
+
+
+    </header>
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
