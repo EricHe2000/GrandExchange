@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('api/v1/user/create', home.createUser, name='createUser'),
+    path('api/v1/user/login', home.loginUser, name='loginUser'),
     path('api/v1/item/create', home.createItem, name='createItem'),
 
     path('api/v1/user/<int:userid>/', home.getUser, name='getUser'),

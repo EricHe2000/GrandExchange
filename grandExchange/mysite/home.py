@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from .models import User, Item
 from django.core import serializers
-from .forms import UserForm, ItemForm
+from .forms import UserForm, ItemForm, LoginForm
 from django.views.decorators.csrf import csrf_exempt
 
 def createUser(request):
@@ -24,6 +24,17 @@ def createUser(request):
 			user_val = list(return_val)
 
 			return JsonResponse(user_val[0], safe=False)
+	else:
+		return JsonResponse({'Error': 'No Post request, try again.'}, safe=False)
+
+def loginUser(request):
+	if request.method == 'POST':
+		form = LoginForm(data=request.POST)
+		if form.is_valid():
+
+			#validate username and password????
+
+			return JsonResponse({'Still': "testing"}, safe=False)
 	else:
 		return JsonResponse({'Error': 'No Post request, try again.'}, safe=False)
 

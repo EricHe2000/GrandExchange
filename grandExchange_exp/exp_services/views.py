@@ -53,4 +53,17 @@ def postUser(request):
     results = json.loads(resp_json)
     return JsonResponse(results)
 
+#change this csrf exempt thing when we get tokens to work
+@csrf_exempt
+def login(request):
 
+    #add stuff here
+    username = request.POST.get('username', None)
+    password = request.POST.get('password', None)
+
+    data_setup = {'username': username, 'password': password}
+    data = urllib.parse.urlencode(data_setup).encode('utf-8')
+    req = urllib.request.Request('http://models:8000/api/v1/user/login', data)
+    resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+    results = json.loads(resp_json)
+    return JsonResponse(results)

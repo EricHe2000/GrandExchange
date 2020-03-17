@@ -7,3 +7,8 @@ class UserForm(forms.Form):
     gender = forms.CharField(max_length=100)
     username = forms.CharField(max_length=50)
     password = forms.CharField(max_length=50)
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(max_length=50)
+
