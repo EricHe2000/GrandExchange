@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django import forms
 
 class CreateUserForm(forms.Form):
-    username = forms.CharField(max_length=200, help_text="Username: ")
+    uniquename = forms.CharField(max_length=200, help_text="Username: ")
     password = forms.CharField(widget=forms.PasswordInput(), max_length=200, help_text="Password: ")
     first_name = forms.CharField(max_length=200, help_text="First Name: ")
     last_name = forms.CharField(max_length=200, help_text="Last Name: ")

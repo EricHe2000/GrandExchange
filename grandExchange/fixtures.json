@@ -24,7 +24,7 @@
     "model": "mysite.User",
     "pk": 1,
     "fields": {
-      "username": "meeperking",
+      "uniquename": "meeperking",
       "password": "Eszwaq312",
       "first_name": "Eric",
       "last_name": "He",
@@ -36,7 +36,7 @@
     "model": "mysite.User",
     "pk": 2,
     "fields": {
-      "username": "meepperking",
+      "uniquename": "meepperking",
       "password": "Es2zwaq312",
       "first_name": "Erica",
       "last_name": "Her",
@@ -48,7 +48,7 @@
     "model": "mysite.User",
     "pk": 3,
     "fields": {
-      "username": "nuggs",
+      "uniquename": "nuggs",
       "password": "qwerqwer",
       "first_name": "Dustin",
       "last_name": "Nyugyn",
@@ -60,7 +60,7 @@
     "model": "mysite.User",
     "pk": 4,
     "fields": {
-      "username": "Riven",
+      "uniquename": "Riven",
       "password": "qwerqwer",
       "first_name": "Ryu",
       "last_name": "Thai",
@@ -72,7 +72,7 @@
     "model": "mysite.User",
     "pk": 5,
     "fields": {
-      "username": "proGramer",
+      "uniquename": "proGramer",
       "password": "rr",
       "first_name": "Pewdipie",
       "last_name": "Gamer",

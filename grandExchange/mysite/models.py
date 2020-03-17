@@ -11,7 +11,7 @@ class Item(models.Model):
 
 
 class User(models.Model):
-    username = models.CharField(max_length=50)
+    uniquename = models.CharField(max_length=50)
     password = models.CharField(max_length=50, default="none")
     first_name = models.CharField(max_length=50, default="none")
     last_name = models.CharField(max_length=50, default="none")
