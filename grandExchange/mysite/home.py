@@ -5,7 +5,7 @@ from django.core import serializers
 from .forms import UserForm, ItemForm
 from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt
+
 def createUser(request):
 	if request.method == 'POST':
 		form= UserForm(request.POST)
@@ -17,7 +17,7 @@ def createUser(request):
 	else:
 		return JsonResponse({'Error': 'No Post request, try again.'})
 
-@csrf_exempt
+
 def createItem(request):
 	if request.method == 'POST':
 		form= ItemForm(request.POST)
