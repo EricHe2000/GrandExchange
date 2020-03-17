@@ -39,9 +39,9 @@ def getHottestCheapestList(request):
 #change this csrf exempt thing when we get tokens to work
 @csrf_exempt
 def postUser(request):
-    name = request.POST.get('fname', None)
-    email = request.POST.get('lname', None)
-    age = request.POST.get('password', None)
+    name = request.POST.get('name', None)
+    email = request.POST.get('email', None)
+    age = request.POST.get('age', None)
     gender = request.POST.get('gender', None)
 
     data_setup = {'name': name, 'email': email, 'age': age, 'gender': gender}
@@ -49,9 +49,6 @@ def postUser(request):
     req = urllib.request.Request('http://models:8000/api/v1/user/create', data)
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     results = json.loads(resp_json)
-
-    #add additional logic/model calls here if needed
-
     return JsonResponse(results)
 
 

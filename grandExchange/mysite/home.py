@@ -16,12 +16,15 @@ def createUser(request):
 			age = form.cleaned_data['age']
 			gender = form.cleaned_data['gender']
 
-			user = User(name,email,age,gender)
+			user = User(name=name,email=email,age=age,gender=gender)
 			user.save()
 
-			return JsonResponse({'id': 'hello'})
+			return_val = User.objects.all().filter(pk=User.objects.all().count()+2).values()
+			user_val = list(return_val)
+
+			return JsonResponse(user_val[0], safe=False)
 	else:
-		return JsonResponse({'Error': 'No Post request, try again.'})
+		return JsonResponse({'Error': 'No Post request, try again.'}, safe=False)
 
 
 def createItem(request):
