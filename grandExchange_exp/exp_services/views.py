@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 import urllib.request
@@ -33,3 +34,36 @@ def getHottestCheapestList(request):
 
     print(dict)
     return JsonResponse(dict)
+
+
+#change this csrf exempt thing when we get tokens to work
+@csrf_exempt
+def postUser(request):
+    name = request.POST.get('name', None)
+    email = request.POST.get('email', None)
+    age = request.POST.get('age', None)
+    gender = request.POST.get('gender', None)
+    username = request.POST.get('username', None)
+    password = request.POST.get('password', None)
+
+    data_setup = {'name': name, 'email': email, 'age': age, 'gender': gender, 'username': username, 'password': password}
+    data = urllib.parse.urlencode(data_setup).encode('utf-8')
+    req = urllib.request.Request('http://models:8000/api/v1/user/create', data)
+    resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+    results = json.loads(resp_json)
+    return JsonResponse(results)
+
+#change this csrf exempt thing when we get tokens to work
+@csrf_exempt
+def login(request):
+
+    #add stuff here
+    username = request.POST.get('username', None)
+    password = request.POST.get('password', None)
+
+    data_setup = {'username': username, 'password': password}
+    data = urllib.parse.urlencode(data_setup).encode('utf-8')
+    req = urllib.request.Request('http://models:8000/api/v1/user/login', data)
+    resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+    results = json.loads(resp_json)
+    return JsonResponse(results)

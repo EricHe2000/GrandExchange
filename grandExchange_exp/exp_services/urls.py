@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/getItem/<int:num>/', views.getItem),
     path('api/v1/item/hottestCheapestList', views.getHottestCheapestList),
+    path('api/v1/post/user', views.postUser),
+    path('api/v1/login/user', views.login)
 ]

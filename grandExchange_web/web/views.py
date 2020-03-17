@@ -3,6 +3,10 @@ import urllib.request
 import urllib.parse
 import json
 import logging
+from .forms import UserForm, LoginForm
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 def index(request):
@@ -29,6 +33,48 @@ def detail(request,num=1):
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     resp = json.loads(resp_json)
     return render(request, 'item.html',context = {'dict':resp})
+
+def createUser(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+
+            data = urllib.parse.urlencode(form.cleaned_data).encode('utf-8')
+
+            req = urllib.request.Request('http://exp:8000/api/v1/post/user', data)
+            resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+            resp = json.loads(resp_json)
+
+            return HttpResponse("Thank you " + resp['name'] + ', your account has successfully been created. Return to Home to login and start creating listings!')
+        else:
+
+            return HttpResponse("please fix issues!")
+
+    else:
+        form = UserForm()
+
+    return render(request, 'createUser.html', {'form': form})
+
+
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+
+            data = urllib.parse.urlencode(form.cleaned_data).encode('utf-8')
+
+            req = urllib.request.Request('http://exp:8000/api/v1/login/user', data)
+            resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+            resp = json.loads(resp_json)
+
+            return HttpResponse("PLACE HOLDER! to do: create an authenticator and validate login info!")
+        else:
+            return HttpResponse("please fix issues!")
+
+    else:
+        form = LoginForm()
+    return render(request, 'loginUser.html', {'form': form})
+
 
 
 

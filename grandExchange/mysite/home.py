@@ -2,20 +2,41 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from .models import User, Item
 from django.core import serializers
-from .forms import UserForm, ItemForm
+from .forms import UserForm, ItemForm, LoginForm
 from django.views.decorators.csrf import csrf_exempt
-
 
 def createUser(request):
 	if request.method == 'POST':
-		form= UserForm(request.POST)
+		form = UserForm(data=request.POST)
 		if form.is_valid():
-			form.save()
-		users = User.objects.all().filter(pk=User.objects.all().count()).values()
-		users_list = list(users)
-		return JsonResponse(users_list, safe=False)
+
+			name = form.cleaned_data['name']
+			email = form.cleaned_data['email']
+			age = form.cleaned_data['age']
+			gender = form.cleaned_data['gender']
+			username = form.cleaned_data['username']
+			password = form.cleaned_data['password']
+
+			user = User(name=name,email=email,age=age,gender=gender, username=username,password=password)
+			user.save()
+
+			return_val = User.objects.all().filter(pk=User.objects.all().count()+2).values()
+			user_val = list(return_val)
+
+			return JsonResponse(user_val[0], safe=False)
 	else:
-		return JsonResponse({'Error': 'No Post request, try again.'})
+		return JsonResponse({'Error': 'No Post request, try again.'}, safe=False)
+
+def loginUser(request):
+	if request.method == 'POST':
+		form = LoginForm(data=request.POST)
+		if form.is_valid():
+
+			#validate username and password????
+
+			return JsonResponse({'Still': "testing"}, safe=False)
+	else:
+		return JsonResponse({'Error': 'No Post request, try again.'}, safe=False)
 
 
 def createItem(request):

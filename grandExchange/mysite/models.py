@@ -11,12 +11,12 @@ class Item(models.Model):
 
 
 class User(models.Model):
-    uniquename = models.CharField(max_length=50)
-    password = models.CharField(max_length=50, default="none")
-    first_name = models.CharField(max_length=50, default="none")
-    last_name = models.CharField(max_length=50, default="none")
-    age = models.DecimalField(max_digits=3, decimal_places=0, default="none")
-    email = models.CharField(max_length=50, default="none")
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    age = models.DecimalField(max_digits=3, decimal_places=0)
+    gender = models.CharField(max_length=100)
+    username = models.CharField(max_length=50, default='')
+    password = models.CharField(max_length=50, default='')
 
         
 class Authenticator(models.Model):
