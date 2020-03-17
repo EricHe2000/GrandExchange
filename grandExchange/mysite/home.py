@@ -5,7 +5,6 @@ from django.core import serializers
 from .forms import UserForm, ItemForm
 from django.views.decorators.csrf import csrf_exempt
 
-@csrf_exempt
 def createUser(request):
 	if request.method == 'POST':
 		form = UserForm(data=request.POST)
@@ -15,8 +14,10 @@ def createUser(request):
 			email = form.cleaned_data['email']
 			age = form.cleaned_data['age']
 			gender = form.cleaned_data['gender']
+			username = form.cleaned_data['username']
+			password = form.cleaned_data['password']
 
-			user = User(name=name,email=email,age=age,gender=gender)
+			user = User(name=name,email=email,age=age,gender=gender, username=username,password=password)
 			user.save()
 
 			return_val = User.objects.all().filter(pk=User.objects.all().count()+2).values()

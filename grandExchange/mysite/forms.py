@@ -9,4 +9,4 @@ class ItemForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     class Meta:
         model= User
-        fields= ["name", "email", "age", "gender"]
+        fields= ["name", "email", "age", "gender","username", "password"]

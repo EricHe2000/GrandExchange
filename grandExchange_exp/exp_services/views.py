@@ -43,8 +43,10 @@ def postUser(request):
     email = request.POST.get('email', None)
     age = request.POST.get('age', None)
     gender = request.POST.get('gender', None)
+    username = request.POST.get('username', None)
+    password = request.POST.get('password', None)
 
-    data_setup = {'name': name, 'email': email, 'age': age, 'gender': gender}
+    data_setup = {'name': name, 'email': email, 'age': age, 'gender': gender, 'username': username, 'password': password}
     data = urllib.parse.urlencode(data_setup).encode('utf-8')
     req = urllib.request.Request('http://models:8000/api/v1/user/create', data)
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')

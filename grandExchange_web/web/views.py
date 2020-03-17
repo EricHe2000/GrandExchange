@@ -33,7 +33,7 @@ def detail(request,num=1):
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     resp = json.loads(resp_json)
     return render(request, 'item.html',context = {'dict':resp})
-@csrf_exempt
+
 def createUser(request):
     if request.method == 'POST':
         form = UserForm(request.POST)

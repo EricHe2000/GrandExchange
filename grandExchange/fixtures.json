@@ -27,7 +27,9 @@
       "name": "John",
       "email": "Lennon",
       "age": 8,
-      "gender": "male"
+      "gender": "male",
+      "username": "john.lennon12",
+      "password": "securePassword!"
     }
   },
   {
@@ -37,7 +39,9 @@
       "name": "Richard",
       "email": "King",
       "age": 22,
-      "gender": "male"
+      "gender": "male",
+      "username": "richard.king",
+      "password": "coolPassword123"
     }
   },
   {
@@ -47,7 +51,9 @@
       "name": "Sara",
       "email": "Gustofson",
       "age": 20,
-      "gender": "female"
+      "gender": "female",
+      "username": "XxDestroyerxX",
+      "password": "123456"
     }
   },
   {
@@ -57,7 +63,9 @@
       "name": "Dustin",
       "email": "Bieber",
       "age": 21,
-      "gender": "male"
+      "gender": "male",
+      "username": "dustinn061",
+      "password": "yes"
     }
   },
   {
@@ -67,7 +75,9 @@
       "name": "Stacy's",
       "email": "Mom",
       "age": 50,
-      "gender": "female"
+      "gender": "female",
+      "username": "MomzRCOOL123",
+      "password": "yesyesyes"
     }
   },
     {

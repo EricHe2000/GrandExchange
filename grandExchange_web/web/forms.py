@@ -5,3 +5,5 @@ class UserForm(forms.Form):
     email = forms.CharField(max_length=50)
     age = forms.DecimalField(max_digits=3, decimal_places=0)
     gender = forms.CharField(max_length=100)
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(max_length=50)
