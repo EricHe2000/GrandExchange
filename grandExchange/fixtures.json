@@ -24,24 +24,24 @@
     "model": "mysite.User",
     "pk": 1,
     "fields": {
-      "name": "John",
-      "email": "Lennon",
-      "age": 8,
-      "gender": "male",
-      "username": "john.lennon12",
-      "password": "securePassword!"
+      "name": "meeperking",
+      "email": "meeps@gmail.com",
+      "age": 5,
+      "gender" : "male",
+      "username" : "meepsking123",
+      "password": "Eszwaq312",
     }
   },
   {
     "model": "mysite.User",
     "pk": 2,
     "fields": {
-      "name": "Richard",
-      "email": "King",
+      "name": "meepperking",
+      "email": "Es2zwaq312",
       "age": 22,
-      "gender": "male",
-      "username": "richard.king",
-      "password": "coolPassword123"
+      "gender": "girl",
+      "username": "tru,
+      "password": "iamcool123"
     }
   },
   {
@@ -60,12 +60,12 @@
     "model": "mysite.User",
     "pk": 4,
     "fields": {
-      "name": "Dustin",
-      "email": "Bieber",
-      "age": 21,
+      "name": "Riven",
+      "email": "Ryu@gmail.com",
+      "age": 11,
       "gender": "male",
-      "username": "dustinn061",
-      "password": "yes"
+      "username": "ryuuuu",
+      "password": "qwerqwer",
     }
   },
   {

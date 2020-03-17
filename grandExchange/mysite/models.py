@@ -18,4 +18,9 @@ class User(models.Model):
     username = models.CharField(max_length=50, default='')
     password = models.CharField(max_length=50, default='')
 
-
+        
+class Authenticator(models.Model):
+    user_id = models.IntegerField(default=0)
+    authenticator = models.CharField(max_length=255, primary_key=True)
+    is_Valid = models.BooleanField(default=True)
+    date_created = models.CharField(max_length=50)
