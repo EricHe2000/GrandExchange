@@ -51,7 +51,7 @@ def createUser(request):
     else:
         form = UserForm()
 
-    return render(request, 'createUser.html', {'form': form})
+    return render(request, 'test.html', {'form': form})
 
 
 

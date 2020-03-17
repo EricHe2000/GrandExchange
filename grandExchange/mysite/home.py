@@ -20,8 +20,8 @@ def createUser(request):
 			user.save()
 
 			return JsonResponse({'id': 'hello'})
-	else:
-		return JsonResponse({'Error': 'No Post request, try again.'})
+		else:
+			return JsonResponse({'Error': 'No Post request, try again.'})
 
 
 def createItem(request):
