@@ -24,50 +24,60 @@
     "model": "mysite.User",
     "pk": 1,
     "fields": {
-      "name": "John",
-      "email": "Lennon",
+      "username": "meeperking",
+      "password": "Eszwaq312",
+      "first_name": "Eric",
+      "last_name": "He",
       "age": 8,
-      "gender": "male"
+      "email": "Lennon@gmail.com"
     }
   },
   {
     "model": "mysite.User",
     "pk": 2,
     "fields": {
-      "name": "Richard",
-      "email": "King",
-      "age": 22,
-      "gender": "male"
+      "username": "meepperking",
+      "password": "Es2zwaq312",
+      "first_name": "Erica",
+      "last_name": "Her",
+      "age": 18,
+      "email": "eric@gmail.com"
     }
   },
   {
     "model": "mysite.User",
     "pk": 3,
     "fields": {
-      "name": "Sara",
-      "email": "Gustofson",
-      "age": 20,
-      "gender": "female"
+      "username": "nuggs",
+      "password": "qwerqwer",
+      "first_name": "Dustin",
+      "last_name": "Nyugyn",
+      "age": 21,
+      "email": "dusty@gmail.com"
     }
   },
   {
     "model": "mysite.User",
     "pk": 4,
     "fields": {
-      "name": "Dustin",
-      "email": "Bieber",
-      "age": 21,
-      "gender": "male"
+      "username": "Riven",
+      "password": "qwerqwer",
+      "first_name": "Ryu",
+      "last_name": "Thai",
+      "age": 11,
+      "email": "Ryu@gmail.com"
     }
   },
   {
     "model": "mysite.User",
     "pk": 5,
     "fields": {
-      "name": "Stacy's",
-      "email": "Mom",
-      "age": 50,
-      "gender": "female"
+      "username": "proGramer",
+      "password": "rr",
+      "first_name": "Pewdipie",
+      "last_name": "Gamer",
+      "age": 31,
+      "email": "dgame@gmail.com"
     }
   },
     {
