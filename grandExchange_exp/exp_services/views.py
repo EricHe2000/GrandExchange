@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-
+from urllib.error import HTTPError
 # Create your views here.
 import urllib.request
 import urllib.parse
@@ -49,12 +49,16 @@ def postUser(request):
     data_setup = {'name': name, 'email': email, 'age': age, 'gender': gender, 'username': username, 'password': password}
     data = urllib.parse.urlencode(data_setup).encode('utf-8')
     req = urllib.request.Request('http://models:8000/api/v1/user/create', data)
-    resp_json = urllib.request.urlopen(req).read().decode('utf-8')
-    results = json.loads(resp_json)
+    try:
+        handler = urllib.request.urlopen(req).read().decode('utf-8')
+    except HTTPError as e:
+        content = e.read()
+        return HttpResponse(content)
+    results = json.loads(handler)
     return JsonResponse(results)
 
 #change this csrf exempt thing when we get tokens to work
-@csrf_exempt
+
 def login(request):
 
     #add stuff here

@@ -4,6 +4,7 @@ from .models import User, Item
 from django.core import serializers
 from .forms import UserForm, ItemForm, LoginForm
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.hashers import make_password, check_password
 
 def createUser(request):
 	if request.method == 'POST':
@@ -15,25 +16,27 @@ def createUser(request):
 			age = form.cleaned_data['age']
 			gender = form.cleaned_data['gender']
 			username = form.cleaned_data['username']
-			password = form.cleaned_data['password']
-
-			user = User(name=name,email=email,age=age,gender=gender, username=username,password=password)
+			password1 = form.cleaned_data['password']
+			#password = make_password(salt = 'xd', password = password1)
+			user = User(name=name,email=email,age=age,gender=gender, username=username,password=password1)
 			user.save()
 
-			return_val = User.objects.all().filter(pk=User.objects.all().count()+2).values()
-			user_val = list(return_val)
+			#return_val = User.objects.all().filter(pk=User.objects.all().count()+2).values()
+			#user_val = list(return_val)
 
 			return JsonResponse(user_val[0], safe=False)
 	else:
 		return JsonResponse({'Error': 'No Post request, try again.'}, safe=False)
 
 def loginUser(request):
+
 	if request.method == 'POST':
 		form = LoginForm(data=request.POST)
 		if form.is_valid():
-
-			#validate username and password????
-
+			username = form.cleaned_data['username']
+			password = form.cleaned_data['password']
+			#user = User.objects.all().filter(username=username and password = password)
+			#if check_password(password,user.password):
 			return JsonResponse({'Still': "testing"}, safe=False)
 	else:
 		return JsonResponse({'Error': 'No Post request, try again.'}, safe=False)

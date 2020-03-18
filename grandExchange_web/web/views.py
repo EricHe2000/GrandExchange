@@ -4,10 +4,10 @@ import urllib.parse
 import json
 import logging
 from .forms import UserForm, LoginForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
-
-
+from urllib.error import HTTPError
+from django.urls import reverse
 
 def index(request):
     req = urllib.request.Request('http://exp:8000/api/v1/item/hottestCheapestList')
@@ -42,10 +42,15 @@ def createUser(request):
             data = urllib.parse.urlencode(form.cleaned_data).encode('utf-8')
 
             req = urllib.request.Request('http://exp:8000/api/v1/post/user', data)
-            resp_json = urllib.request.urlopen(req).read().decode('utf-8')
-            resp = json.loads(resp_json)
-
-            return HttpResponse("Thank you " + resp['name'] + ', your account has successfully been created. Return to Home to login and start creating listings!')
+            #resp_json = urllib.request.urlopen(req)
+            try:
+                handler = urllib.request.urlopen(req).read().decode('utf-8')
+            except HTTPError as e:
+                content = e.read()
+                return HttpResponse(content)
+            #resp = json.loads(handler)
+            return HttpResponse(handler)
+            #return HttpResponse('Thank you , your account has successfully been created. Return to Home to login and start creating listings!')
         else:
 
             return HttpResponse("please fix issues!")
@@ -55,27 +60,57 @@ def createUser(request):
 
     return render(request, 'createUser.html', {'form': form})
 
+"""
+exp_srvc_errors.py: where I put some HTTP error status codes that the experience
+service can return.
+"""
+
 
 def login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-
-            data = urllib.parse.urlencode(form.cleaned_data).encode('utf-8')
-
-            req = urllib.request.Request('http://exp:8000/api/v1/login/user', data)
-            resp_json = urllib.request.urlopen(req).read().decode('utf-8')
-            resp = json.loads(resp_json)
-
-            return HttpResponse("PLACE HOLDER! to do: create an authenticator and validate login info!")
-        else:
-            return HttpResponse("please fix issues!")
-
-    else:
+    # If we received a GET request instead of a POST request
+    
+    if request.method == 'GET':
+        # display the login form page
         form = LoginForm()
-    return render(request, 'loginUser.html', {'form': form})
+        return render(request, 'loginUser.html', {'form': form})
 
+    # Creates a new instance of our login_form and gives it our POST data
+    f = LoginForm(request.POST)
 
+    # Check if the form instance is invalid
+    if not f.is_valid():
+      # Form was bad -- send them back to login page and show them an error
+      form = LoginForm()
+      return render(request, 'loginUser.html', {'form': form})
+
+    # Sanitize username and password fields
+    #username = f.cleaned_data['username']
+    #password = f.cleaned_data['password']
+    data = urllib.parse.urlencode(f.cleaned_data).encode('utf-8')
+
+    # Get next page
+    next = reverse('home')
+
+    # Send validated information to our experience layer
+    req = urllib.request.Request('http://exp:8000/api/v1/login/user', data = data, method= 'POST')
+    try:
+        handler = urllib.request.urlopen(req).read().decode('utf-8')
+    except HTTPError as e:
+        content = e.read()
+    resp = json.loads(handler)
+    # Check if the experience layer said they gave us incorrect information
+    if not resp or not resp['ok']:
+      # Couldn't log them in, send them back to login page with error
+      return HttpResponse("please fix issues!FIX LATER")
+
+    """ If we made it here, we can log them in. """
+    # Set their login cookie and redirect to back to wherever they came from
+    authenticator = resp['resp']['authenticator']
+
+    response = HttpResponseRedirect(next)
+    response.set_cookie("auth", authenticator)
+
+    return response
 
 
 
