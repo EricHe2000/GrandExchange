@@ -39,5 +39,6 @@ urlpatterns = [
 
     path('api/v1/item/hottest', home.getHottestItem, name='getHottestItem'),
     path('api/v1/item/cheapest', home.getCheapestItem, name='getCheapestItem'),
+    path('api/v1/auth/check', home.checkAuth, name='checkAuth'),
 ]
 

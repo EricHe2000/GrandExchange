@@ -55,13 +55,36 @@ def postUser(request):
         content = e.read()
         return HttpResponse(content)
     results = json.loads(handler)
-    return JsonResponse(results)
+    return JsonResponse(results, safe = False)
 
 #change this csrf exempt thing when we get tokens to work
+@csrf_exempt
+def postItem(request):
+    #checkAuth = urllib.request.Request('http://models:8000/api/v1/auth/check', data)
+    sold = request.POST.get('sold', None)
+    title = request.POST.get('title', None)
+    description = request.POST.get('description', None)
+    price = request.POST.get('price', None)
+    numberBought = request.POST.get('numberBought', None)
 
+    data_setup = {'sold': sold, 'title': title, 'description': description, 'price': price, 'numberBought': numberBought}
+    data = urllib.parse.urlencode(data_setup).encode('utf-8')
+    req = urllib.request.Request('http://models:8000/api/v1/item/create', data)
+    
+    try:
+        handler = urllib.request.urlopen(req).read().decode('utf-8')
+    except HTTPError as e:
+        content = e.read()
+        return HttpResponse(content)
+    results = json.loads(handler)
+    return JsonResponse(results, safe = False)
+
+
+#change this csrf exempt thing when we get tokens to work
+@csrf_exempt
 def login(request):
-
-    #add stuff here
+    response = {}
+    
     username = request.POST.get('username', None)
     password = request.POST.get('password', None)
 
@@ -71,3 +94,20 @@ def login(request):
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     results = json.loads(resp_json)
     return JsonResponse(results)
+    
+@csrf_exempt
+def checkAuth(request):
+    
+    auth = request.POST.get('authenticator', None)
+
+    data_setup = {'authenticator': auth}
+    data = urllib.parse.urlencode(data_setup).encode('utf-8')
+    req = urllib.request.Request('http://models:8000/api/v1/auth/check', data)
+    
+    try:
+        handler = urllib.request.urlopen(req).read().decode('utf-8')
+    except HTTPError as e:
+        content = e.read()
+        return HttpResponse(content)
+    results = json.loads(handler)
+    return JsonResponse(results, safe = False)

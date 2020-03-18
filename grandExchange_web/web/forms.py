@@ -17,6 +17,13 @@ class UserForm(forms.Form):
     username = forms.CharField(max_length=50)
     password = forms.CharField(max_length=50)
 
+class ListingForm(forms.Form):
+    sold = forms.BooleanField(required=False)
+    title = forms.CharField(max_length=100)
+    description = forms.CharField(max_length=150)
+    price = forms.DecimalField(max_digits=10, decimal_places=2)
+    numberBought = forms.IntegerField()
+
 class LoginForm(forms.Form):
     username = forms.CharField(label='Username', max_length=100)
     password = forms.CharField(label='Password', max_length=100, validators=[passwordValidator], widget=PasswordInput())

@@ -3,7 +3,7 @@ import urllib.request
 import urllib.parse
 import json
 import logging
-from .forms import UserForm, LoginForm
+from .forms import UserForm, LoginForm, ListingForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from urllib.error import HTTPError
@@ -48,9 +48,8 @@ def createUser(request):
             except HTTPError as e:
                 content = e.read()
                 return HttpResponse(content)
-            #resp = json.loads(handler)
             return HttpResponse(handler)
-            #return HttpResponse('Thank you , your account has successfully been created. Return to Home to login and start creating listings!')
+            return HttpResponse("Thank you," + handler + 'your account has successfully been created. Return to Home to login and start creating listings!')
         else:
 
             return HttpResponse("please fix issues!")
@@ -60,11 +59,47 @@ def createUser(request):
 
     return render(request, 'createUser.html', {'form': form})
 
+def createListing(request):
+    auth = request.COOKIES.get('auth')
+    if not auth:
+        #return HttpResponseRedirect(reverse("login"))
+        return HttpResponse("you are not authed")
+    data = {'authenticator': auth}
+    authenticator = urllib.parse.urlencode(data).encode('utf-8')
+    req = urllib.request.Request('http://exp:8000/api/v1/auth/check', authenticator)
+    try:
+        handler = urllib.request.urlopen(req).read().decode('utf-8')
+        results = json.loads(handler)
+        #return HttpResponse(handler)
+    except HTTPError as e:
+        content = e.read()
+
+    if results["ok"] == True: # if actually valid
+        if request.method == 'POST':
+            form = ListingForm(request.POST)
+            if form.is_valid():
+                data = urllib.parse.urlencode(form.cleaned_data).encode('utf-8')
+                
+                req = urllib.request.Request('http://exp:8000/api/v1/post/item', data)
+                try:
+                    handler = urllib.request.urlopen(req).read().decode('utf-8')
+                except HTTPError as e:
+                    content = e.read()
+                    return HttpResponse(content)
+                return HttpResponse(handler)
+            #return HttpResponse("Thank you," + handler + 'your account has successfully been created. Return to Home to login and start creating listings!')
+        else:
+            form = ListingForm()
+    else:
+        return HttpResponse("you are not a real authorized user")
+
+    return render(request, 'createListing.html', {'form': form})
+
+
 """
 exp_srvc_errors.py: where I put some HTTP error status codes that the experience
 service can return.
 """
-
 
 def login(request):
     # If we received a GET request instead of a POST request
@@ -95,22 +130,22 @@ def login(request):
     req = urllib.request.Request('http://exp:8000/api/v1/login/user', data = data, method= 'POST')
     try:
         handler = urllib.request.urlopen(req).read().decode('utf-8')
+        resp = json.loads(handler)
+    # Check if the experience layer said they gave us incorrect information
+        if not resp or not resp['ok']:
+    # Couldn't log them in, send them back to login page with error
+            return HttpResponseRedirect(reverse('login')) #add error message 
+        authenticator = resp['data']['authenticator']
+        response = HttpResponseRedirect(next)
+        response.set_cookie("auth", authenticator)
+        return response
     except HTTPError as e:
         content = e.read()
-    resp = json.loads(handler)
-    # Check if the experience layer said they gave us incorrect information
-    if not resp or not resp['ok']:
-      # Couldn't log them in, send them back to login page with error
-      return HttpResponse("please fix issues!FIX LATER")
 
+    return content
     """ If we made it here, we can log them in. """
     # Set their login cookie and redirect to back to wherever they came from
-    authenticator = resp['resp']['authenticator']
 
-    response = HttpResponseRedirect(next)
-    response.set_cookie("auth", authenticator)
-
-    return response
 
 
 
