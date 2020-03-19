@@ -16,7 +16,7 @@ class User(models.Model):
     age = models.DecimalField(max_digits=3, decimal_places=0)
     gender = models.CharField(max_length=100)
     username = models.CharField(max_length=50, default='')
-    password = models.CharField(max_length=50, default='')
+    password = models.CharField(max_length=500, default='')
 
         
 class Authenticator(models.Model):

@@ -20,18 +20,17 @@
 
 <body>
 
-  {% include "header.html" %}
+{% include "header.html" %}
 
   <!-- Page Content -->
   <div class="container">
 
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
-      <h1 class="display-4">Create a New Account</h1>
-      {%if createUserFailed %}<div><font color="red">Failed to Create User. Please try again</font></div><br>{% endif %}
-      <p class="lead">Create a new account to be able to make buy and sell requests with your fellow Grand Exchange members.</p>
+      <h1 class="display-4">Create a Listing</h1>
+      <p class="lead">Create a new listing to be able to sell requests to your fellow Grand Exchange members.</p>
 
-        <form action="/create/user/" method="post">
+        <form action="/create/item/" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="OK">
