@@ -94,7 +94,23 @@ def login(request):
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     results = json.loads(resp_json)
     return JsonResponse(results)
+
+@csrf_exempt
+def logout(request):
+    auth = request.POST.get('authenticator', None)
+
+    data_setup = {'authenticator': auth}
+    data = urllib.parse.urlencode(data_setup).encode('utf-8')
+    req = urllib.request.Request('http://models:8000/api/v1/auth/logout', data)
     
+    try:
+        handler = urllib.request.urlopen(req).read().decode('utf-8')
+    except HTTPError as e:
+        content = e.read()
+        return HttpResponse(content)
+    results = json.loads(handler)
+    return JsonResponse(results, safe = False)
+
 @csrf_exempt
 def checkAuth(request):
     

@@ -98,6 +98,22 @@ def checkAuth(request):
 			response['ok'] = False
 	return JsonResponse(response)
 
+def logout(request):
+	response = {}
+	user_auth = request.POST.get('authenticator', None)
+	if user_auth is None:
+		 response['ok'] = False
+	try:
+		authObj = Authenticator.objects.get(authenticator = user_auth)
+	except Authenticator.DoesNotExist:
+		authObj = None
+	if authObj is not None:
+		authObj.delete()
+		response['ok'] = True
+	else:
+		response['ok'] = False
+	return JsonResponse(response)
+
 def createItem(request):
 	if request.method == 'POST':
 		form= ItemForm(request.POST)

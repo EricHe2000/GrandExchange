@@ -24,5 +24,6 @@ urlpatterns = [
     path('api/v1/post/user', views.postUser),
     path('api/v1/post/item', views.postItem),
     path('api/v1/login/user', views.login),
-    path('api/v1/auth/check', views.checkAuth)
+    path('api/v1/auth/check', views.checkAuth),
+    path('api/v1/auth/logout', views.logout)
 ]
