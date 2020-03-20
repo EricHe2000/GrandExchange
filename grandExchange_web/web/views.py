@@ -52,7 +52,6 @@ def detail(request,num=1):
     return render(request, 'item.html',context = {'dict':resp})
 
 def createUser(request):
-    login = isLoggedIn(request)
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
@@ -61,18 +60,34 @@ def createUser(request):
             #resp_json = urllib.request.urlopen(req)
             try:
                 handler = urllib.request.urlopen(req).read().decode('utf-8')
-
+                results = json.loads(handler)
+                if not results["ok"]: #false means user already exists
+                    return render(request, 'createUser.html', {'createUserFailed': True ,'userExists': results["ok"],'form': form})
             except HTTPError as e:
                 content = e.read()
                 return redirect("login")
             return redirect("login")
         else:
-            return render(request, 'createUser.html', {'createUserFailed': True ,'form': form})
+            return render(request, 'createUser.html', {'createUserFailed': True ,'userExists': False,'form': form})
 
     else:
         form = UserForm()
 
-    return render(request, 'createUser.html', {'form': form})
+    return render(request, 'createUser.html', {'userExists': True,'form': form})
+
+def showItems(request):
+    resp = {}
+    login = isLoggedIn(request)
+    if login:
+        req = urllib.request.Request('http://exp:8000/api/v1/item/getAllItems')
+        try:
+            handler = urllib.request.urlopen(req).read().decode('utf-8')
+            results = json.loads(handler)
+        except HTTPError as e:
+            content = e.read()
+        return render(request, 'itemIndex.html',{'dict':results})
+    else:
+        return redirect("login")
 
 def createListing(request):
     login = isLoggedIn(request)

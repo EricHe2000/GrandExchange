@@ -70,10 +70,13 @@ def getHottestCheapestList(request):
         dict = {"Hottest1": results[0],"Hottest2": results[1] ,"Hottest3": results[2],"Hottest4": results[3] ,"Cheapest1": results2[0],"Cheapest2": results2[1],"Cheapest3": results2[2],"Cheapest4": results2[3]}
     else:
         dict = {}
-
-    print(dict)
     return JsonResponse(dict)
 
+def getAllItems(request):
+    req = urllib.request.Request('http://models:8000/api/v1/item/getAll')
+    resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+    results = json.loads(resp_json)
+    return JsonResponse(results,safe = False)
 
 #change this csrf exempt thing when we get tokens to work
 @csrf_exempt

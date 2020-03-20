@@ -1,0 +1,103 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+</head>
+{% include "header.html" %}
+<body>
+        </div>
+            <!-- Citation: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_collapsible_accordion&stacked=h -->
+            <div class="panel-group" id="accordion" style="padding-right: 3%;">
+                {% for postVar in dict %}
+                <div class="panel panel-default all">
+                    <div class="panel-heading">
+                        <span style="color: black; float: left; width: 150px;">
+                            {{ postVar.title }}
+                        </span>
+                        <span class="panel-title">
+                            <!-- Note: The data-parent attribute makes sure that all collapsible elements under the specified parent will be closed when one of the collapsible item is shown.-->
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}"
+                                style="color: #0225c2; text-decoration: none;">{{ postVar.title }}</a>
+                        </span>
+                        <span style="float: right;">
+                            ${{ postVar.price }}
+                        </span>
+                    </div>
+                    {% if forloop.counter == 1 %}
+                    <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
+                        {% else %}
+                        <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
+                            {% endif %}
+                            <div class="panel-body">
+                                <div style="display: inline-block; width: 800px; height: 300px;">
+                                    {% if postVar.file %}
+                                    <img style="height: 100%; width: 300px; border-radius: 5px; float: left;"
+                                        src="{{postVar.file.url}}">
+                                    {%endif%}
+                                    <div style="margin-left: 315px; width: 300px; height: 300px;">
+                                        <div
+                                            style="border: 1px solid #e3e3e3; background-color: #f5f5f5; border-radius: 5px; height: 30%; width: 100%;">
+                                            <div
+                                                style="padding-left: 5px; padding-top: 5px; margin-left: 5px; font-size: 15px;">
+                                                {{ postVar.title }}
+                                            </div>
+                                            <div style="font-size: 10px; margin-left: 10px; color: grey;">
+                                                Posted by {{ postVar.user.first_name }}
+                                                {{ postVar.user.last_name }}</span>
+                                            </div>
+                                            <div
+                                                style="position: relative; bottom: -5px; left: 10px; font-size: 18px; color: #0db80d;">
+                                                ${{ postVar.price }}
+                                            </div>
+                                        </div>
+                                        <div
+                                            style="border: 1px solid #e3e3e3; background-color: #f5f5f5; border-radius: 5px; margin-top: 5%; width: 100%; padding: 10px; font-size: 12px;">
+                                            {{ postVar.description }}
+                                        </div>
+                                        <a class="btn btn-outline-primary"
+                                            style="margin-top: 10px; border: 1px solid blue;"
+                                            href="/posts/{{ postVar.id }}/">More</a>
+                                        <a class="btn btn-outline-danger"
+                                            style="margin-top: 10px; border: 1px solid red;"
+                                            href="/posts/{{ postVar.id }}/delete">Delete</a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+                    <p>No posts are available.</p>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,12 +1,12 @@
 from django.db import models
 from django.conf import settings
-
+from django.db.models import Model 
 
 class Item(models.Model):
     sold = models.BooleanField(default=False)
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=150)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.PositiveIntegerField()
     numberBought = models.IntegerField(default=0)
 
 

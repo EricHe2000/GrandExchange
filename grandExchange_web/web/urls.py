@@ -28,5 +28,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('profile/', views.profile, name='profile'),
-    path('profile/update/', views.updateProfile, name='updateProfile')
+    path('profile/update/', views.updateProfile, name='updateProfile'),
+    path('items/', views.showItems, name='showItems')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

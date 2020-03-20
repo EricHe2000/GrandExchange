@@ -11,22 +11,21 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password, check_password
 def createUser(request):
 	response = {}
+	response['ok'] = False
 	if request.method == 'POST':
 		form = UserForm(data=request.POST)
 		if form.is_valid():
 			username = form.cleaned_data['username']
-			if User.objects.filter(username=username):
-				response['ok'] = False
-			else:
-				response['ok'] = True			
+			if not User.objects.filter(username=username):		
 				name = form.cleaned_data['name']
 				email = form.cleaned_data['email']
 				age = form.cleaned_data['age']
 				gender = form.cleaned_data['gender']
 				password1 = form.cleaned_data['password']
-				password = make_password(password1)
+				password = make_password(password1,salt="hehexd")
 				user = User(name=name,email=email,age=age,gender=gender, username=username,password=password)
 				user.save()
+				response['ok'] = True	
 			#return_val = User.objects.all().filter(pk=User.objects.all().count()+2).values()
 			return JsonResponse(response)
 	else:
@@ -138,6 +137,14 @@ def getItem(request, itemid):
 	if item.exists():
 		item_list = list(item.values())
 		return JsonResponse(item_list[0], safe=False)
+	else:
+		return JsonResponse({'Error': 'Item does not exist'})
+
+def getAllItems(request):
+	items = Item.objects.all().order_by('price').reverse()
+	if items.exists():
+		item_list = list(items.values())
+		return JsonResponse(item_list, safe=False)
 	else:
 		return JsonResponse({'Error': 'Item does not exist'})
 

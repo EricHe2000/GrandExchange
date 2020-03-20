@@ -9,11 +9,18 @@ passwordValidator = RegexValidator(
     code='invalid_password'
 )
 
+GENDER_CHOICES =( 
+    ("1", "Male"), 
+    ("2", "Female"), 
+    ("3", "Genderqueer/Non-Binary"), 
+    ("4", "Prefer not to disclose"),
+) 
+
 class UserForm(forms.Form):
     name = forms.CharField(max_length=100)
-    email = forms.CharField(max_length=50)
+    email = forms.EmailField(max_length=50)
     age = forms.DecimalField(max_digits=3, decimal_places=0)
-    gender = forms.CharField(max_length=100)
+    gender = forms.ChoiceField(choices = GENDER_CHOICES)
     username = forms.CharField(max_length=50)
     password = forms.CharField(max_length=50)
 
@@ -30,7 +37,7 @@ class LoginForm(forms.Form):
 
 class UpdateProfileForm(forms.Form):
     name = forms.CharField(max_length=100, required=False)
-    email = forms.CharField(max_length=50, required=False)
+    email = forms.EmailField(max_length=50, required=False)
     age = forms.DecimalField(max_digits=3, decimal_places=0, required=False)
-    gender = forms.CharField(max_length=100, required=False)
+    gender = forms.ChoiceField(choices = GENDER_CHOICES)
 
