@@ -6,7 +6,7 @@ import urllib.request
 import urllib.parse
 import json
 from django.http import JsonResponse, HttpResponse
-
+import time
 
 def getItem(request,num=1):
     req = urllib.request.Request('http://models:8000/api/v1/item/'+str(num))
@@ -16,6 +16,45 @@ def getItem(request,num=1):
     #dict = {"sold":results[0], 'title': 'tru', 'description' : 'yeye', 'price' : 6.5, 'id':4}
 
     return JsonResponse(results)
+
+
+
+
+@csrf_exempt
+def getUser(request, num=1):
+    #num = request.GET['data']
+
+    req = urllib.request.Request('http://models:8000/api/v1/user/' +str(num))
+    resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+    results = json.loads(resp_json)
+
+    #dict = {"sold":results[0], 'title': 'tru', 'description' : 'yeye', 'price' : 6.5, 'id':4}
+
+    return JsonResponse(results)
+
+@csrf_exempt
+def updateUser(request, num=1):
+    name = request.POST.get('name', None)
+    email = request.POST.get('email', None)
+    gender = request.POST.get('gender', None)
+    #dealing with the weird case of having a non given age
+    if request.POST.get('age', None) == 'None':
+        age = 0
+    else:
+        age = request.POST.get('age', None)
+
+    data_setup = {'name': name,'email': email, 'age': age, 'gender': gender}
+    data = urllib.parse.urlencode(data_setup).encode('utf-8')
+    req = urllib.request.Request('http://models:8000/api/v1/user/'+str(num)+'/update', data)
+    try:
+        handler = urllib.request.urlopen(req).read().decode('utf-8')
+    except HTTPError as e:
+        content = e.read()
+        return HttpResponse(content)
+    results = json.loads(handler)
+    return JsonResponse(results, safe=False)
+
+
 
 def getHottestCheapestList(request):
     req = urllib.request.Request('http://models:8000/api/v1/item/hottest')
