@@ -3,7 +3,7 @@ import urllib.request
 import urllib.parse
 import json
 import logging
-from .forms import UserForm, LoginForm, ListingForm
+from .forms import UserForm, LoginForm, ListingForm, UpdateProfileForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from urllib.error import HTTPError
@@ -61,6 +61,7 @@ def createUser(request):
             #resp_json = urllib.request.urlopen(req)
             try:
                 handler = urllib.request.urlopen(req).read().decode('utf-8')
+
             except HTTPError as e:
                 content = e.read()
                 return redirect("login")
@@ -116,7 +117,12 @@ def logout(request):
         except KeyError as e:
             content = e
     if login:
-        return redirect("home")
+        logout(request)
+        response = HttpResponseRedirect('/')
+        response.delete_cookie('auth')
+        response.delete_cookie('user_id')
+        response.delete_cookie('userid')
+        return response
     else:
         return HttpResponse("logout failed")
 
@@ -157,8 +163,14 @@ def login(request):
             form = LoginForm()
             return render(request, 'loginUser.html',context = {'failedLogin':True,'form': form})
         authenticator = resp['data']['authenticator']
+        user_id = resp['data']['user_id']
+        date = resp['data']['date_created']
+
+
         response = HttpResponseRedirect(next)
         response.set_cookie("auth", authenticator)
+        response.set_cookie('user_id', user_id)
+
         return response
     except HTTPError as e:
         content = e.read()
@@ -167,6 +179,48 @@ def login(request):
     """ If we made it here, we can log them in. """
     # Set their login cookie and redirect to back to wherever they came from
 
+def profile(request):
+    login = isLoggedIn(request)
+    if login:
+        num = request.COOKIES.get('user_id')
+        #d = dict(num=num)
+        #f = urllib.parse.urlencode(d).encode('utf-8')
 
+        req = urllib.request.Request('http://exp:8000/api/v1/getUser/'+str(num))
+        resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+        resp = json.loads(resp_json)
+        return render(request, 'viewUser.html', context={'dict': resp, 'login':login})
+        #return HttpResponse()
+    else:
+        return redirect('login')
+
+
+
+def updateProfile(request):
+    login = isLoggedIn(request)
+    if login:  # if actually valid
+        if request.method == 'POST':
+            form = UpdateProfileForm(request.POST)
+
+            if form.is_valid():
+                data = urllib.parse.urlencode(form.cleaned_data).encode('utf-8')
+                num = request.COOKIES.get('user_id')
+
+                req = urllib.request.Request('http://exp:8000/api/v1/user/' + str(num) + '/update', data)
+                try:
+                    handler = urllib.request.urlopen(req).read().decode('utf-8')
+                    results = json.loads(handler)
+
+                    return redirect("/profile/")
+                except HTTPError as e:
+                    content = e.read()
+                    return HttpResponse(content)
+                # return HttpResponse("Thank you," + handler + 'your account has successfully been created. Return to Home to login and start creating listings!')
+        else:
+            form = UpdateProfileForm()
+    else:
+        return redirect("login")
+
+    return render(request, 'updateProfile.html', {'form': form})
 
 

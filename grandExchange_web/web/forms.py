@@ -27,3 +27,10 @@ class ListingForm(forms.Form):
 class LoginForm(forms.Form):
     username = forms.CharField(label='Username', max_length=100)
     password = forms.CharField(label='Password', max_length=100, validators=[passwordValidator], widget=PasswordInput())
+
+class UpdateProfileForm(forms.Form):
+    name = forms.CharField(max_length=100, required=False)
+    email = forms.CharField(max_length=50, required=False)
+    age = forms.DecimalField(max_digits=3, decimal_places=0, required=False)
+    gender = forms.CharField(max_length=100, required=False)
+

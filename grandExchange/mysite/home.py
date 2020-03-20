@@ -129,7 +129,7 @@ def getUser(request, userid):
 	user = User.objects.all().filter(pk=userid)
 	if user.exists():
 		user_list = list(user.values())
-		return JsonResponse(user_list, safe=False)	
+		return JsonResponse(user_list[0], safe=False)
 	else:
 		return JsonResponse({'Error': 'User does not exist'}) 
 
@@ -163,13 +163,13 @@ def updateUser(request, userid):
 
 	if request.method == 'POST':
 		user = User.objects.all().filter(pk=userid)
-		if request.POST.get('name') != None:
+		if request.POST.get('name') != '':
 			user.update(name=request.POST.get('name'))
-		if request.POST.get('email') != None:
+		if request.POST.get('email') != '':
 			user.update(email=request.POST.get('email'))
-		if request.POST.get('age') != None:
+		if request.POST.get('age') != '0':
 			user.update(age=request.POST.get('age'))
-		if request.POST.get('gender') != None:
+		if request.POST.get('gender') != '':
 			user.update(gender=request.POST.get('gender'))
 
 		users_list = list(user.values())
