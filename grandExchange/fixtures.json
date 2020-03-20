@@ -1,171 +1,656 @@
 [
-  { "model": "auth.user",
+    {
+        "model": "contenttypes.contenttype",
         "pk": 1,
         "fields": {
-            "username": "user1",
-            "password": "password"
+            "app_label": "admin",
+            "model": "logentry"
         }
     },
-  { "model": "auth.user",
+    {
+        "model": "contenttypes.contenttype",
         "pk": 2,
         "fields": {
-            "username": "user2",
-            "password": "password2"
+            "app_label": "auth",
+            "model": "group"
         }
     },
-  { "model": "auth.user",
+    {
+        "model": "contenttypes.contenttype",
         "pk": 3,
         "fields": {
-            "username": "user3",
-            "password": "password3"
+            "app_label": "auth",
+            "model": "permission"
         }
     },
-  {
-    "model": "mysite.User",
-    "pk": 1,
-    "fields": {
-      "name": "meeperking",
-      "email": "meeps@gmail.com",
-      "age": 5,
-      "gender" : "male",
-      "username" : "meepsking123",
-      "password": "Eszwaq312"
-    }
-  },
-  {
-    "model": "mysite.User",
-    "pk": 2,
-    "fields": {
-      "name": "meepperking",
-      "email": "Es2zwaq312",
-      "age": 22,
-      "gender": "girl",
-      "username": "tru",
-      "password": "iamcool123"
-    }
-  },
-  {
-    "model": "mysite.User",
-    "pk": 3,
-    "fields": {
-      "name": "Sara",
-      "email": "Gustofson",
-      "age": 20,
-      "gender": "female",
-      "username": "XxDestroyerxX",
-      "password": "123456"
-    }
-  },
-  {
-    "model": "mysite.User",
-    "pk": 4,
-    "fields": {
-      "name": "Riven",
-      "email": "Ryu@gmail.com",
-      "age": 11,
-      "gender": "male",
-      "username": "ryuuuu",
-      "password": "qwerqwer"
-    }
-  },
-  {
-    "model": "mysite.User",
-    "pk": 5,
-    "fields": {
-      "name": "Stacy's",
-      "email": "Mom",
-      "age": 50,
-      "gender": "female",
-      "username": "MomzRCOOL123",
-      "password": "yesyesyes"
-    }
-  },
     {
-    "model": "mysite.Item",
-    "pk": 1,
-    "fields": {
-      "sold": "False",
-      "title": "Earth Rune",
-      "description": "One of the four basic elemental runes. Used in Magic (9)",
-      "price": 16,
-      "numberBought": 4
+        "model": "contenttypes.contenttype",
+        "pk": 4,
+        "fields": {
+            "app_label": "auth",
+            "model": "user"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 5,
+        "fields": {
+            "app_label": "contenttypes",
+            "model": "contenttype"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 6,
+        "fields": {
+            "app_label": "sessions",
+            "model": "session"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 7,
+        "fields": {
+            "app_label": "mysite",
+            "model": "item"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 8,
+        "fields": {
+            "app_label": "mysite",
+            "model": "user"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 9,
+        "fields": {
+            "app_label": "mysite",
+            "model": "authenticator"
+        }
+    },
+    {
+        "model": "mysite.item",
+        "pk": 1,
+        "fields": {
+            "sold": false,
+            "title": "Earth Rune",
+            "description": "One of the four basic elemental runes. Used in Magic (9)",
+            "price": 16,
+            "numberBought": 4
+        }
+    },
+    {
+        "model": "mysite.item",
+        "pk": 2,
+        "fields": {
+            "sold": true,
+            "title": "Rune Arrow",
+            "description": "Arrows with rune heads",
+            "price": 163,
+            "numberBought": 3
+        }
+    },
+    {
+        "model": "mysite.item",
+        "pk": 3,
+        "fields": {
+            "sold": false,
+            "title": "Feather",
+            "description": "Used for fly fishing",
+            "price": 12,
+            "numberBought": 2
+        }
+    },
+    {
+        "model": "mysite.item",
+        "pk": 4,
+        "fields": {
+            "sold": false,
+            "title": "Pure Essence",
+            "description": "An uncharged Rune Stone of extra capability. Used in Runecrafting for training and production",
+            "price": 32,
+            "numberBought": 0
+        }
+    },
+    {
+        "model": "mysite.item",
+        "pk": 5,
+        "fields": {
+            "sold": false,
+            "title": "Yew logs",
+            "description": "Logs cut from a yew tree",
+            "price": 169,
+            "numberBought": 20
+        }
+    },
+    {
+        "model": "mysite.item",
+        "pk": 6,
+        "fields": {
+            "sold": false,
+            "title": "Raw tuna",
+            "description": "I should try cooking this",
+            "price": 335,
+            "numberBought": 5
+        }
+    },
+    {
+        "model": "mysite.item",
+        "pk": 7,
+        "fields": {
+            "sold": false,
+            "title": "Magic Notepaper",
+            "description": "Use an item on this magical notepaper to make it noted and stackable",
+            "price": 1228,
+            "numberBought": 15
+        }
+    },
+    {
+        "model": "mysite.item",
+        "pk": 8,
+        "fields": {
+            "sold": false,
+            "title": "Rune scimitar",
+            "description": "A rune scimitar",
+            "price": 16800,
+            "numberBought": 31
+        }
+    },
+    {
+        "model": "mysite.item",
+        "pk": 9,
+        "fields": {
+            "sold": true,
+            "title": "23",
+            "description": "23",
+            "price": 23,
+            "numberBought": 0
+        }
+    },
+    {
+        "model": "mysite.user",
+        "pk": 1,
+        "fields": {
+            "name": "Eric He",
+            "email": "eriche2000@gmail.com",
+            "age": "3",
+            "gender": "Male",
+            "username": "meeperking",
+            "password": "pbkdf2_sha256$150000$hehexd$0utgCpbQohSBdrRSutCe4ElPcGp2CKwezYaF8R6Z7lU="
+        }
+    },
+    {
+        "model": "mysite.user",
+        "pk": 2,
+        "fields": {
+            "name": "Dustin",
+            "email": "dnuggs@gmail.com",
+            "age": "21",
+            "gender": "Male",
+            "username": "dustin1",
+            "password": "pbkdf2_sha256$150000$hehexd$w/fUhhpj+3cx73WJNv3GGEovrWj27w0b8ekSwoV66fg="
+        }
+    },
+    {
+        "model": "mysite.user",
+        "pk": 3,
+        "fields": {
+            "name": "fake",
+            "email": "fake@gmai.com",
+            "age": "12",
+            "gender": "Male",
+            "username": "fake",
+            "password": "pbkdf2_sha256$150000$hehexd$J5BZgWt/U3Sax2cyXsfSjVur/N+X3ERiDgjKl5TzQcs="
+        }
+    },
+    {
+        "model": "mysite.user",
+        "pk": 4,
+        "fields": {
+            "name": "JoJo",
+            "email": "jojo@gmai.com",
+            "age": "22",
+            "gender": "Male",
+            "username": "jojo",
+            "password": "pbkdf2_sha256$150000$hehexd$sie8yoMZA18RjulEMtkt95b+ajqmn67pyDdicukoy0A="
+        }
+    },
+    {
+        "model": "mysite.user",
+        "pk": 5,
+        "fields": {
+            "name": "mrbug",
+            "email": "mrbug@yahoo.com",
+            "age": "22",
+            "gender": "Male",
+            "username": "mrbug",
+            "password": "pbkdf2_sha256$150000$hehexd$cBQrFrPmXzDbQyRU9edNUrPDgEijTVJcv4EKEkrDoNg="
+        }
+    },
+    {
+        "model": "mysite.user",
+        "pk": 6,
+        "fields": {
+            "name": "e-girl",
+            "email": "e-girl@gmail.com",
+            "age": "18",
+            "gender": "Female",
+            "username": "e-girl",
+            "password": "pbkdf2_sha256$150000$hehexd$DgAbqHFIZBzn/+51lk7ZwpscRrnWJPbWmtcxv3KfeHU="
+        }
+    },
+    {
+        "model": "mysite.user",
+        "pk": 7,
+        "fields": {
+            "name": "KLiu",
+            "email": "shitplayer@gmail.com",
+            "age": "20",
+            "gender": "Genderqueer/Non-Binary",
+            "username": "ShitLeaguePlayer",
+            "password": "pbkdf2_sha256$150000$hehexd$pwRwmtjMY2vf+L36uKmKHqi4tTjC4AeDtefjLsKA2I4="
+        }
+    },
+    {
+        "model": "mysite.user",
+        "pk": 8,
+        "fields": {
+            "name": "kliu",
+            "email": "vaynePlayer@gmail.com",
+            "age": "13",
+            "gender": "Male",
+            "username": "LilBoi",
+            "password": "pbkdf2_sha256$150000$hehexd$sJOEKr8h4M6fUKJDxbseAksHjHNJQM/dSe0vbCdu9dM="
+        }
+    },
+    {
+        "model": "mysite.authenticator",
+        "pk": "6a6279cb5a5b50c1943eeb35be6b3ac90fc1d7b810d4e2f1365b1061320ddca0",
+        "fields": {
+            "user_id": 10,
+            "is_Valid": true,
+            "date_created": "2020-03-20"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 1,
+        "fields": {
+            "name": "Can add log entry",
+            "content_type": 1,
+            "codename": "add_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 2,
+        "fields": {
+            "name": "Can change log entry",
+            "content_type": 1,
+            "codename": "change_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 3,
+        "fields": {
+            "name": "Can delete log entry",
+            "content_type": 1,
+            "codename": "delete_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 4,
+        "fields": {
+            "name": "Can view log entry",
+            "content_type": 1,
+            "codename": "view_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 5,
+        "fields": {
+            "name": "Can add user",
+            "content_type": 4,
+            "codename": "add_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 6,
+        "fields": {
+            "name": "Can change user",
+            "content_type": 4,
+            "codename": "change_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 7,
+        "fields": {
+            "name": "Can delete user",
+            "content_type": 4,
+            "codename": "delete_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 8,
+        "fields": {
+            "name": "Can view user",
+            "content_type": 4,
+            "codename": "view_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 9,
+        "fields": {
+            "name": "Can add group",
+            "content_type": 2,
+            "codename": "add_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 10,
+        "fields": {
+            "name": "Can change group",
+            "content_type": 2,
+            "codename": "change_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 11,
+        "fields": {
+            "name": "Can delete group",
+            "content_type": 2,
+            "codename": "delete_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 12,
+        "fields": {
+            "name": "Can view group",
+            "content_type": 2,
+            "codename": "view_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 13,
+        "fields": {
+            "name": "Can add permission",
+            "content_type": 3,
+            "codename": "add_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 14,
+        "fields": {
+            "name": "Can change permission",
+            "content_type": 3,
+            "codename": "change_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 15,
+        "fields": {
+            "name": "Can delete permission",
+            "content_type": 3,
+            "codename": "delete_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 16,
+        "fields": {
+            "name": "Can view permission",
+            "content_type": 3,
+            "codename": "view_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 17,
+        "fields": {
+            "name": "Can add content type",
+            "content_type": 5,
+            "codename": "add_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 18,
+        "fields": {
+            "name": "Can change content type",
+            "content_type": 5,
+            "codename": "change_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 19,
+        "fields": {
+            "name": "Can delete content type",
+            "content_type": 5,
+            "codename": "delete_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 20,
+        "fields": {
+            "name": "Can view content type",
+            "content_type": 5,
+            "codename": "view_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 21,
+        "fields": {
+            "name": "Can add session",
+            "content_type": 6,
+            "codename": "add_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 22,
+        "fields": {
+            "name": "Can change session",
+            "content_type": 6,
+            "codename": "change_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 23,
+        "fields": {
+            "name": "Can delete session",
+            "content_type": 6,
+            "codename": "delete_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 24,
+        "fields": {
+            "name": "Can view session",
+            "content_type": 6,
+            "codename": "view_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 25,
+        "fields": {
+            "name": "Can add user",
+            "content_type": 8,
+            "codename": "add_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 26,
+        "fields": {
+            "name": "Can change user",
+            "content_type": 8,
+            "codename": "change_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 27,
+        "fields": {
+            "name": "Can delete user",
+            "content_type": 8,
+            "codename": "delete_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 28,
+        "fields": {
+            "name": "Can view user",
+            "content_type": 8,
+            "codename": "view_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 29,
+        "fields": {
+            "name": "Can add authenticator",
+            "content_type": 9,
+            "codename": "add_authenticator"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 30,
+        "fields": {
+            "name": "Can change authenticator",
+            "content_type": 9,
+            "codename": "change_authenticator"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 31,
+        "fields": {
+            "name": "Can delete authenticator",
+            "content_type": 9,
+            "codename": "delete_authenticator"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 32,
+        "fields": {
+            "name": "Can view authenticator",
+            "content_type": 9,
+            "codename": "view_authenticator"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 33,
+        "fields": {
+            "name": "Can add item",
+            "content_type": 7,
+            "codename": "add_item"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 34,
+        "fields": {
+            "name": "Can change item",
+            "content_type": 7,
+            "codename": "change_item"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 35,
+        "fields": {
+            "name": "Can delete item",
+            "content_type": 7,
+            "codename": "delete_item"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 36,
+        "fields": {
+            "name": "Can view item",
+            "content_type": 7,
+            "codename": "view_item"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "password": "password",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user1",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2020-03-20T18:37:05.658Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "password": "password2",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user2",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2020-03-20T18:37:05.660Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 3,
+        "fields": {
+            "password": "password3",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "user3",
+            "first_name": "",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2020-03-20T18:37:05.661Z",
+            "groups": [],
+            "user_permissions": []
+        }
     }
-  },
-  {
-    "model": "mysite.Item",
-    "pk": 2,
-    "fields": {
-      "sold": "True",
-      "title": "Rune Arrow",
-      "description": "Arrows with rune heads",
-      "price": 163,
-      "numberBought": 3
-    }
-  },
-  {
-    "model": "mysite.Item",
-    "pk": 3,
-    "fields": {
-      "sold": "False",
-      "title": "Feather",
-      "description": "Used for fly fishing",
-      "price": 12,
-      "numberBought": 2
-    }
-  },
-  {
-    "model": "mysite.Item",
-    "pk": 4,
-    "fields": {
-      "sold": "False",
-      "title": "Pure Essence",
-      "description": "An uncharged Rune Stone of extra capability. Used in Runecrafting for training and production",
-      "price": 32,
-      "numberBought": 0
-    }
-  },
-  {
-    "model": "mysite.Item",
-    "pk": 5,
-    "fields": {
-      "sold": "False",
-      "title": "Yew logs",
-      "description": "Logs cut from a yew tree",
-      "price": 169,
-      "numberBought": 20
-    }
-  },
-  {
-    "model": "mysite.Item",
-    "pk": 6,
-    "fields": {
-      "sold": "False",
-      "title": "Raw tuna",
-      "description": "I should try cooking this",
-      "price": 335,
-      "numberBought": 5
-    }
-  },
-  {
-    "model": "mysite.Item",
-    "pk": 7,
-    "fields": {
-      "sold": "False",
-      "title": "Magic Notepaper",
-      "description": "Use an item on this magical notepaper to make it noted and stackable",
-      "price": 1228,
-      "numberBought": 15
-    }
-  },
-  {
-    "model": "mysite.Item",
-    "pk": 8,
-    "fields": {
-      "sold": "False",
-      "title": "Rune scimitar",
-      "description": "A rune scimitar",
-      "price": 16800,
-      "numberBought": 31
-    }
-  }
 ]

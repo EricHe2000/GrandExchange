@@ -10,10 +10,10 @@ passwordValidator = RegexValidator(
 )
 
 GENDER_CHOICES =( 
-    ("1", "Male"), 
-    ("2", "Female"), 
-    ("3", "Genderqueer/Non-Binary"), 
-    ("4", "Prefer not to disclose"),
+    ("Male", "Male"), 
+    ("Female", "Female"), 
+    ("Genderqueer/Non-Binary", "Genderqueer/Non-Binary"), 
+    ("Prefer not to disclose", "Prefer not to disclose"),
 ) 
 
 class UserForm(forms.Form):
