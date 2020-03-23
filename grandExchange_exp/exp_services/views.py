@@ -37,13 +37,14 @@ def updateUser(request, num=1):
     name = request.POST.get('name', None)
     email = request.POST.get('email', None)
     gender = request.POST.get('gender', None)
+    password = request.POST.get('password', None)
     #dealing with the weird case of having a non given age
     if request.POST.get('age', None) == 'None':
         age = 0
     else:
         age = request.POST.get('age', None)
 
-    data_setup = {'name': name,'email': email, 'age': age, 'gender': gender}
+    data_setup = {'name': name,'email': email, 'age': age, 'gender': gender,'password': password}
     data = urllib.parse.urlencode(data_setup).encode('utf-8')
     req = urllib.request.Request('http://models:8000/api/v1/user/'+str(num)+'/update', data)
     try:

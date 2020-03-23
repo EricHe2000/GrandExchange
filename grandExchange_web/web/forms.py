@@ -22,7 +22,7 @@ class UserForm(forms.Form):
     age = forms.DecimalField(max_digits=3, decimal_places=0)
     gender = forms.ChoiceField(choices = GENDER_CHOICES)
     username = forms.CharField(max_length=50)
-    password = forms.CharField(max_length=50)
+    password = forms.CharField(max_length=500)
 
 class ListingForm(forms.Form):
     sold = forms.BooleanField(required=False)
@@ -40,4 +40,5 @@ class UpdateProfileForm(forms.Form):
     email = forms.EmailField(max_length=50, required=False)
     age = forms.DecimalField(max_digits=3, decimal_places=0, required=False)
     gender = forms.ChoiceField(choices = GENDER_CHOICES)
+    password = forms.CharField(max_length=500)
 

@@ -178,7 +178,12 @@ def updateUser(request, userid):
 			user.update(age=request.POST.get('age'))
 		if request.POST.get('gender') != '':
 			user.update(gender=request.POST.get('gender'))
-
+		if request.POST.get('password') != '':
+			password = make_password(request.POST.get('password'),salt="hehexd")
+			#print("password check in update user:" ,request.POST.get('password'))
+			user.update(password=password)
+			#print("password check in update user:" ,password)
+			#print(str(check_password("2",password)))
 		users_list = list(user.values())
 		return JsonResponse(users_list, safe=False)
 

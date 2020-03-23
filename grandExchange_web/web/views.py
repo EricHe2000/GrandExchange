@@ -52,28 +52,32 @@ def detail(request,num=1):
     return render(request, 'item.html',context = {'dict':resp})
 
 def createUser(request):
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            data = urllib.parse.urlencode(form.cleaned_data).encode('utf-8')
-            req = urllib.request.Request('http://exp:8000/api/v1/post/user', data)
-            #resp_json = urllib.request.urlopen(req)
-            try:
-                handler = urllib.request.urlopen(req).read().decode('utf-8')
-                results = json.loads(handler)
-                if not results["ok"]: #false means user already exists
-                    return render(request, 'createUser.html', {'createUserFailed': True ,'userExists': results["ok"],'form': form})
-            except HTTPError as e:
-                content = e.read()
+    login = isLoggedIn(request)
+    if not login: 
+        if request.method == 'POST':
+            form = UserForm(request.POST)
+            if form.is_valid():
+                data = urllib.parse.urlencode(form.cleaned_data).encode('utf-8')
+                req = urllib.request.Request('http://exp:8000/api/v1/post/user', data)
+                #resp_json = urllib.request.urlopen(req)
+                try:
+                    handler = urllib.request.urlopen(req).read().decode('utf-8')
+                    results = json.loads(handler)
+                    if not results["ok"]: #false means user already exists
+                        return render(request, 'createUser.html', {'createUserFailed': True ,'userExists': results["ok"],'form': form})
+                except HTTPError as e:
+                    content = e.read()
+                    return redirect("login")
                 return redirect("login")
-            return redirect("login")
+            else:
+                return render(request, 'createUser.html', {'createUserFailed': True ,'userExists': False,'form': form})
+
         else:
-            return render(request, 'createUser.html', {'createUserFailed': True ,'userExists': False,'form': form})
+            form = UserForm()
 
+        return render(request, 'createUser.html', {'userExists': True,'form': form})
     else:
-        form = UserForm()
-
-    return render(request, 'createUser.html', {'userExists': True,'form': form})
+        return redirect("home")
 
 def showItems(request):
     resp = {}
@@ -85,7 +89,7 @@ def showItems(request):
             results = json.loads(handler)
         except HTTPError as e:
             content = e.read()
-        return render(request, 'itemIndex.html',{'dict':results})
+        return render(request, 'itemIndex.html',{'dict':results,'login':login})
     else:
         return redirect("login")
 
@@ -142,55 +146,58 @@ def logout(request):
         return HttpResponse("logout failed")
 
 def login(request):
+    login = isLoggedIn(request)
     # If we received a GET request instead of a POST request
-    
-    if request.method == 'GET':
-        # display the login form page
-        form = LoginForm()
-        return render(request, 'loginUser.html', {'form': form})
-
-    # Creates a new instance of our login_form and gives it our POST data
-    f = LoginForm(request.POST)
-
-    # Check if the form instance is invalid
-    if not f.is_valid():
-      # Form was bad -- send them back to login page and show them an error
-      form = LoginForm()
-      return render(request, 'loginUser.html', {'form': form})
-
-    # Sanitize username and password fields
-    #username = f.cleaned_data['username']
-    #password = f.cleaned_data['password']
-    data = urllib.parse.urlencode(f.cleaned_data).encode('utf-8')
-
-    # Get next page
-    next = reverse('home')
-
-    # Send validated information to our experience layer
-    req = urllib.request.Request('http://exp:8000/api/v1/login/user', data = data, method= 'POST')
-    try:
-        handler = urllib.request.urlopen(req).read().decode('utf-8')
-        resp = json.loads(handler)
-    # Check if the experience layer said they gave us incorrect information
-        if not resp or not resp['ok']:
-    # Couldn't log them in, send them back to login page with error
-            #return HttpResponseRedirect(reverse('login')) #add error message
+    if not login: 
+        if request.method == 'GET':
+            # display the login form page
             form = LoginForm()
-            return render(request, 'loginUser.html',context = {'failedLogin':True,'form': form})
-        authenticator = resp['data']['authenticator']
-        user_id = resp['data']['user_id']
-        date = resp['data']['date_created']
+            return render(request, 'loginUser.html', {'form': form})
+
+        # Creates a new instance of our login_form and gives it our POST data
+        f = LoginForm(request.POST)
+
+        # Check if the form instance is invalid
+        if not f.is_valid():
+        # Form was bad -- send them back to login page and show them an error
+            form = LoginForm()
+            return render(request, 'loginUser.html', {'form': form})
+
+        # Sanitize username and password fields
+        #username = f.cleaned_data['username']
+        #password = f.cleaned_data['password']
+        data = urllib.parse.urlencode(f.cleaned_data).encode('utf-8')
+
+        # Get next page
+        next = reverse('home')
+
+        # Send validated information to our experience layer
+        req = urllib.request.Request('http://exp:8000/api/v1/login/user', data = data, method= 'POST')
+        try:
+            handler = urllib.request.urlopen(req).read().decode('utf-8')
+            resp = json.loads(handler)
+        # Check if the experience layer said they gave us incorrect information
+            if not resp or not resp['ok']:
+        # Couldn't log them in, send them back to login page with error
+                #return HttpResponseRedirect(reverse('login')) #add error message
+                form = LoginForm()
+                return render(request, 'loginUser.html',context = {'failedLogin':True,'form': form})
+            authenticator = resp['data']['authenticator']
+            user_id = resp['data']['user_id']
+            date = resp['data']['date_created']
 
 
-        response = HttpResponseRedirect(next)
-        response.set_cookie("auth", authenticator)
-        response.set_cookie('user_id', user_id)
+            response = HttpResponseRedirect(next)
+            response.set_cookie("auth", authenticator)
+            response.set_cookie('user_id', user_id)
 
-        return response
-    except HTTPError as e:
-        content = e.read()
+            return response
+        except HTTPError as e:
+            content = e.read()
 
-    return content
+        return content
+    else: 
+        return redirect("home")
     """ If we made it here, we can log them in. """
     # Set their login cookie and redirect to back to wherever they came from
 

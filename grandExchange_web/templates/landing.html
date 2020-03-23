@@ -29,11 +29,17 @@
     <header class="jumbotron my-4">
       <h1 class="display-3">Welcome to the GE</h1>
       <p class="lead">The Grand Exchange (abbreviated as GE) is a trading system for players to buy and sell almost all tradeable items.</p>
-      <a href="/create/user/" class="btn btn-primary btn-lg">Create an Account now!</a>
-      <a href="/login/" class="btn btn-primary btn-lg">Already have one? Login Here!</a>
-      {%if login%}<a href="/create/item/" class="btn btn-primary btn-lg">Create Listing</a>{% endif %}
-      {%if login%}<a href="/items/" class="btn btn-primary btn-lg">View Listing</a>{% endif %}
-      {%if login%}<a href="/profile/" class="btn btn-primary btn-lg"> Update Profile </a>{% endif %}
+      <div align = center style="margin-top:35px">
+        {%if not login%}
+          <a href="/create/user/" class="btn btn-primary btn-lg">Create an Account now!</a>
+          <a href="/login/" class="btn btn-primary btn-lg">Already have one? Login Here!</a>
+        {% endif %}
+        {%if login%}
+          <a href="/create/item/" class="btn btn-primary btn-lg">Create Listing</a>
+          <a href="/items/" class="btn btn-primary btn-lg">View Listing</a>
+          <a href="/profile/" class="btn btn-primary btn-lg"> Update Profile </a>
+        {% endif %}
+      </div> 
     </header>
 
     <h1>Hottest Items🔥</h1>

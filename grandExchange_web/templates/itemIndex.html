@@ -1,23 +1,24 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    {% include "header.html" %}
-    <title>Grand Exchange Items</title>
-    <body> 
-    <h1>All Items👌</h1>
-    </body>
-  <div class="container-fluid">
-    
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  {% include "header.html" %}
+  <title>Grand Exchange Items</title>
+</head>
+
+<body>
+  <div class="container-fluid" style="margin-top:100px;">
     <!-- Page Features -->
     <div class="row text-center">
-        {% for item in dict %}
+      {% for item in dict %}
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
           <img class="card-img-top" src="http://placehold.it/500x325" alt="">
@@ -33,4 +34,6 @@
         </div>
       </div>
       {% endfor%}
+</body>
+
 </html>
