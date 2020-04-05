@@ -7,6 +7,8 @@ import urllib.parse
 import json
 from django.http import JsonResponse, HttpResponse
 import time
+from kafka import KafkaProducer
+
 
 def getItem(request,num=1):
     req = urllib.request.Request('http://models:8000/api/v1/item/'+str(num))
@@ -113,13 +115,25 @@ def postItem(request):
     data_setup = {'sold': sold, 'title': title, 'description': description, 'price': price, 'numberBought': numberBought}
     data = urllib.parse.urlencode(data_setup).encode('utf-8')
     req = urllib.request.Request('http://models:8000/api/v1/item/create', data)
-    
+
+
+
+
     try:
         handler = urllib.request.urlopen(req).read().decode('utf-8')
     except HTTPError as e:
         content = e.read()
         return HttpResponse(content)
     results = json.loads(handler)
+
+
+
+    # send data our kafka queue
+    producer = KafkaProducer(bootstrap_servers='kafka:9092')
+    #get ID to pass into queue as well. possibly use for elastic search? (besides other fields)
+    data_setup['id'] = results[0]['id']
+    producer.send('newItem', json.dumps(data_setup).encode('utf-8'))
+
     return JsonResponse(results, safe = False)
 
 

@@ -37,7 +37,40 @@ services:
       - ./grandExchange_web:/app
     command: "mod_wsgi-express start-server --reload-on-changes ./grandExchange_web/wsgi.py"
 
+  kafka:
+    image: spotify/kafka
+    container_name: kafka
+    networks:
+      - batch_network
+      - service_mesh
+    environment:
+      ADVERTISED_HOST: kafka
+      ADVERTISED_PORT: 9092
+    hostname: kafka
+
+  es:
+    image: elasticsearch:7.4.0
+    container_name: es
+    environment:
+      - discovery.type=single-node
+    networks:
+      - service_mesh
+      - mod_exp_network
+    ports:
+      - "9200:9200"
+
+  batch:
+    image: tp33/django
+    container_name: batch
+    networks:
+      - batch_network
+    volumes:
+      - ./:/app
+    command: python batch.py
+
 networks:
   backend:
   service_mesh:
   public:
+  mod_exp_network:
+  batch_network:
