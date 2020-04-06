@@ -89,7 +89,7 @@ def getRequestedItems(request):
     dict = {'0': query}
     es = Elasticsearch(['es'])
 
-    results = es.search(index='listing_index', body={'query': {'query_string': {'query': 'hello'}}, 'size': 10})
+    results = es.search(index='listing_index', body={'query': {'query_string': {'query': query}}, 'size': 10})
 
     #results = results['hits']['hits']
     #return JsonResponse(dict)

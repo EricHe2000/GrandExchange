@@ -67,7 +67,7 @@ services:
       - batch_network
     volumes:
       - ./:/app
-    command: bash -c "python search_indexer.py"
+    command: bash -c "python batch.py"
 
 networks:
   backend:

@@ -10,6 +10,7 @@ from urllib.error import HTTPError
 from django.urls import reverse
 
 def index(request):
+
     resp = {}
     login = isLoggedIn(request)
     req = urllib.request.Request('http://exp:8000/api/v1/item/hottestCheapestList')
