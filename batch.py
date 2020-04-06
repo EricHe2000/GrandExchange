@@ -9,9 +9,11 @@ for message in consumer:
 
     # do something with the "message" in the queue... probably add to ES so we can process it later
     item = json.loads((message.value).decode('utf-8'))
-    es.index(index='listing_index', doc_type='listing', id=item['id'], body=item)
+    es.index(index='listing_index', doc_type='listing', id=item['pk'], body=item)
 
     #commit changes w this command
     es.indices.refresh(index="listing_index")
+
+    print('hi')
 
 

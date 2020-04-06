@@ -56,6 +56,7 @@ services:
     networks:
       - service_mesh
       - mod_exp_network
+      - batch_network
     ports:
       - "9200:9200"
 
@@ -66,7 +67,7 @@ services:
       - batch_network
     volumes:
       - ./:/app
-    command: python batch.py
+    command: bash -c "python search_indexer.py"
 
 networks:
   backend:

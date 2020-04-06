@@ -89,9 +89,10 @@ def getRequestedItems(request):
     dict = {'0': query}
     es = Elasticsearch(['es'])
 
-    results = es.search(index='listing_index', body={'query': {'query_string': {'query': dict['query']}}, 'size': 10})
+    results = es.search(index='listing_index', body={'query': {'query_string': {'query': 'hello'}}, 'size': 10})
 
-    return JsonResponse(dict)
+    #results = results['hits']['hits']
+    #return JsonResponse(dict)
     return JsonResponse(results,safe = False)
 
 
@@ -137,7 +138,8 @@ def postItem(request):
         handler = urllib.request.urlopen(req).read().decode('utf-8')
     except HTTPError as e:
         content = e.read()
-        return HttpResponse(content)
+
+
     results = json.loads(handler)
 
 

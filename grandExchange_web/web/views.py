@@ -110,7 +110,7 @@ def showResults(request):
             #    content = e.read()
 
 
-            return HttpResponse(results['0'])
+            return JsonResponse(results)
             #return render(request, 'itemResults.html', {'dict': results, 'login': login})
         else:
             #redirect to all items
