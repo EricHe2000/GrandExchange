@@ -71,7 +71,8 @@
 
 	<!-- HTML for SEARCH BAR -->
 	<div id="tfheader">
-		<form id="tfnewsearch" method="post" action="/items/results/">
+		<form id="tfnewsearch" method="get" action="/items/results/">
+            {% csrf_token %}
 		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>

@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/v1/auth/check', views.checkAuth),
     path('api/v1/auth/logout', views.logout),
     path('api/v1/user/<int:num>/update', views.updateUser),
-    path('api/v1/item/getAllItems', views.getAllItems)
+    path('api/v1/item/getAllItems', views.getAllItems),
+    path('api/v1/item/getRequestedItems', views.getRequestedItems)
     
 ]

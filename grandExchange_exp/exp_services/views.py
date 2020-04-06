@@ -8,6 +8,7 @@ import json
 from django.http import JsonResponse, HttpResponse
 import time
 from kafka import KafkaProducer
+from elasticsearch import Elasticsearch
 
 
 def getItem(request,num=1):
@@ -80,6 +81,19 @@ def getAllItems(request):
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     results = json.loads(resp_json)
     return JsonResponse(results,safe = False)
+
+@csrf_exempt
+def getRequestedItems(request):
+    #we dont need to call models here.... we just see what elastic search has for us.
+    query = request.POST['query']
+    dict = {'0': query}
+    es = Elasticsearch(['es'])
+
+    results = es.search(index='listing_index', body={'query': {'query_string': {'query': dict['query']}}, 'size': 10})
+
+    return JsonResponse(dict)
+    return JsonResponse(results,safe = False)
+
 
 #change this csrf exempt thing when we get tokens to work
 @csrf_exempt

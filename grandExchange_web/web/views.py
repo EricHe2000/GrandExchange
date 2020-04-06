@@ -4,7 +4,7 @@ import urllib.parse
 import json
 import logging
 from .forms import UserForm, LoginForm, ListingForm, UpdateProfileForm
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from urllib.error import HTTPError
 from django.urls import reverse
@@ -92,6 +92,33 @@ def showItems(request):
         return render(request, 'itemIndex.html',{'dict':results,'login':login})
     else:
         return redirect("login")
+
+def showResults(request):
+    resp = {}
+    login = isLoggedIn(request)
+    if login:
+        if request.method == 'GET':
+
+            data = {'query': request.GET['q']}
+            data2 = urllib.parse.urlencode(data).encode('utf-8')
+            req = urllib.request.Request('http://exp:8000/api/v1/item/getRequestedItems', data=data2)
+
+            #try:
+            handler = urllib.request.urlopen(req).read().decode('utf-8')
+            results = json.loads(handler)
+            #except HTTPError as e:
+            #    content = e.read()
+
+
+            return HttpResponse(results['0'])
+            #return render(request, 'itemResults.html', {'dict': results, 'login': login})
+        else:
+            #redirect to all items
+            return redirect("showItems")
+    else:
+        #redirect user to login
+        return redirect("login")
+
 
 def createListing(request):
     login = isLoggedIn(request)
