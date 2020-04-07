@@ -96,7 +96,22 @@ def getRequestedItems(request):
     else:
         results = es.search(index='listing_index', body={'query': {'query_string': {'query': query}}, 'size': 10})
 
-    print(results)
+    ids = []
+
+    for each in results['hits']['hits']:
+        ids.append(each['_id'])
+
+    ids_dict = {'ids' : ids }
+
+    data = urllib.parse.urlencode(ids_dict).encode('utf-8')
+    req = urllib.request.Request('http://models:8000/api/v1/item/getSome', data)
+
+    print('hello!!!!!!!!!!!!!!')
+
+    handler = urllib.request.urlopen(req).read().decode('utf-8')
+    results = json.loads(handler)
+
+
 
     #results = results['hits']['hits']
     #return JsonResponse(dict)

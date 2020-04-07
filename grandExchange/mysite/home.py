@@ -140,6 +140,35 @@ def getItem(request, itemid):
 	else:
 		return JsonResponse({'Error': 'Item does not exist'})
 
+def getSomeItems(request):
+	itemids = request.POST.get('ids')
+	#['19', '20']
+
+	itemids = itemids.replace('[','').replace(']','').replace('\'','').replace(' ','').split(',')
+
+	empty_list = ['']
+
+	if itemids == empty_list:
+		listx = []
+		not_found = {'sold': 'No results found.', 'title': 'Try again', 'description': '', 'price': 'NAN',
+					 'numberBought': 'N/A'}
+		listx.append(not_found)
+		items_dict = {'items': listx}
+		return JsonResponse(items_dict, safe=False)
+
+	items = []
+	for each in itemids:
+		print(each)
+		print(type(each))
+		#do we need to sort by score first?
+		item = Item.objects.all().filter(pk=int(each))
+		item_list = list(item.values())
+		items.append(item_list[0])
+
+	items_dict = {'items' : items}
+
+	return JsonResponse(items_dict, safe=False)
+
 def getAllItems(request):
 	items = Item.objects.all().order_by('price').reverse()
 	if items.exists():

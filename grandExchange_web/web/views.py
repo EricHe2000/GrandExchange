@@ -87,6 +87,8 @@ def showItems(request):
         try:
             handler = urllib.request.urlopen(req).read().decode('utf-8')
             results = json.loads(handler)
+            print(results)
+            print(type(results))
         except HTTPError as e:
             content = e.read()
         return render(request, 'itemIndex.html',{'dict':results,'login':login})
@@ -106,12 +108,12 @@ def showResults(request):
             #try:
             handler = urllib.request.urlopen(req).read().decode('utf-8')
             results = json.loads(handler)
+            results = results['items']
             #except HTTPError as e:
             #    content = e.read()
 
-
-            return JsonResponse(results)
-            #return render(request, 'itemResults.html', {'dict': results, 'login': login})
+            #return JsonResponse(results)
+            return render(request, 'itemResults.html', {'dict': results, 'login': login})
         else:
             #redirect to all items
             return redirect("showItems")
