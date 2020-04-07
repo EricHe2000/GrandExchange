@@ -55,7 +55,6 @@ services:
       - discovery.type=single-node
     networks:
       - service_mesh
-      - mod_exp_network
       - batch_network
     ports:
       - "9200:9200"
@@ -73,5 +72,4 @@ networks:
   backend:
   service_mesh:
   public:
-  mod_exp_network:
   batch_network:

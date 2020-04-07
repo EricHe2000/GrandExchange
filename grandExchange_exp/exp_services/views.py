@@ -86,10 +86,17 @@ def getAllItems(request):
 def getRequestedItems(request):
     #we dont need to call models here.... we just see what elastic search has for us.
     query = request.POST['query']
+
     dict = {'0': query}
     es = Elasticsearch(['es'])
 
-    results = es.search(index='listing_index', body={'query': {'query_string': {'query': query}}, 'size': 10})
+    if not es.indices.exists(index='listing_index'):
+        es.indices.create(index='listing_index', ignore=400)
+        results = {}
+    else:
+        results = es.search(index='listing_index', body={'query': {'query_string': {'query': query}}, 'size': 10})
+
+    print(results)
 
     #results = results['hits']['hits']
     #return JsonResponse(dict)
@@ -131,25 +138,22 @@ def postItem(request):
     data = urllib.parse.urlencode(data_setup).encode('utf-8')
     req = urllib.request.Request('http://models:8000/api/v1/item/create', data)
 
-
-
-
     try:
         handler = urllib.request.urlopen(req).read().decode('utf-8')
     except HTTPError as e:
         content = e.read()
 
-
     results = json.loads(handler)
-
-
 
     # send data our kafka queue
     producer = KafkaProducer(bootstrap_servers='kafka:9092')
     #get ID to pass into queue as well. possibly use for elastic search? (besides other fields)
     data_setup['id'] = results[0]['id']
-    producer.send('newItem', json.dumps(data_setup).encode('utf-8'))
 
+    print(data_setup)
+    producer.send('new-listings-topic', json.dumps(data_setup).encode('utf-8'))
+    print(producer.send('new-listings-topic', json.dumps(data_setup).encode('utf-8')))
+    producer.close()
     return JsonResponse(results, safe = False)
 
 
