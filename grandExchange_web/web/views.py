@@ -45,7 +45,15 @@ def isLoggedIn(request):
 
 def detail(request,num=1):
 
-    req = urllib.request.Request('http://exp:8000/api/v1/getItem/'+str(num))
+    item_id = num
+    user_id = request.COOKIES.get('user_id')
+
+    data = {'user_id' : user_id, 'item_id' : item_id}
+    data2 = urllib.parse.urlencode(data).encode('utf-8')
+
+    print(data2)
+
+    req = urllib.request.Request('http://exp:8000/api/v1/getItem/'+str(num)+'/', data=data2)
 
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     resp = json.loads(resp_json)

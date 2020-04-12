@@ -10,16 +10,25 @@ import time
 from kafka import KafkaProducer
 from elasticsearch import Elasticsearch
 
-
+@csrf_exempt
 def getItem(request,num=1):
+
+
+    user_id = request.POST['user_id']
+    item_id = request.POST['item_id']
+
+    data = {'user_id': user_id, 'item_id': item_id}
+
+
+    producer = KafkaProducer(bootstrap_servers=['kafka:9092'])
+    producer.send('new-log-topic', json.dumps(data).encode('utf-8'))
+    producer.close()
+
     req = urllib.request.Request('http://models:8000/api/v1/item/'+str(num))
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     results = json.loads(resp_json)
 
-    #dict = {"sold":results[0], 'title': 'tru', 'description' : 'yeye', 'price' : 6.5, 'id':4}
-
     return JsonResponse(results)
-
 
 
 

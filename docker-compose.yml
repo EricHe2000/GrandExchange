@@ -68,6 +68,15 @@ services:
       - ./:/app
     command: bash -c "python batch.py"
 
+  batch-log:
+    image: tp33/django
+    container_name: batch-log
+    networks:
+      - batch_network
+    volumes:
+      - ./:/app
+    command: bash -c "python log.py"
+
 
 networks:
   backend:
