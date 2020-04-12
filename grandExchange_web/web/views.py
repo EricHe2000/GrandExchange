@@ -121,6 +121,28 @@ def showResults(request):
         #redirect user to login
         return redirect("login")
 
+def showResultsPopular(request):
+    resp = {}
+    login = isLoggedIn(request)
+    if login:
+        if request.method == 'GET':
+
+            data = {'query': request.GET['q2']}
+            data2 = urllib.parse.urlencode(data).encode('utf-8')
+            req = urllib.request.Request('http://exp:8000/api/v1/item/getRequestedPopular', data=data2)
+
+            handler = urllib.request.urlopen(req).read().decode('utf-8')
+            results = json.loads(handler)
+            results = results['items']
+
+            return render(request, 'itemResults.html', {'dict': results, 'login': login})
+        else:
+            #redirect to all items
+            return redirect("showItems")
+    else:
+        #redirect user to login
+        return redirect("login")
+
 
 def createListing(request):
     login = isLoggedIn(request)

@@ -16,7 +16,7 @@
 	#tfheader{
 		background-color:#c3dfef;
 	}
-	#tfnewsearch{
+	.tfnewsearch{
 		float:right;
 		padding:20px;
 	}
@@ -71,9 +71,13 @@
 
 	<!-- HTML for SEARCH BAR -->
 	<div id="tfheader">
-		<form id="tfnewsearch" method="get" action="/items/results/">
+		<form class="tfnewsearch" method="get" action="/items/results/popular/">
             {% csrf_token %}
-		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search" class="tfbutton">
+		        <input type="text" class="tftextinput" name="q2" size="21" maxlength="120"><input type="submit" value="search by most popular" class="tfbutton">
+		</form>
+        <form class="tfnewsearch" method="get" action="/items/results/">
+            {% csrf_token %}
+		        <input type="text" class="tftextinput" name="q" size="21" maxlength="120"><input type="submit" value="search by word match" class="tfbutton">
 		</form>
 	<div class="tfclear"></div>
 	</div>

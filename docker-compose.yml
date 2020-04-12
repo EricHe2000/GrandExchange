@@ -68,6 +68,7 @@ services:
       - ./:/app
     command: bash -c "python batch.py"
 
+
 networks:
   backend:
   service_mesh:

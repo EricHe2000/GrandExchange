@@ -111,10 +111,42 @@ def getRequestedItems(request):
     handler = urllib.request.urlopen(req).read().decode('utf-8')
     results = json.loads(handler)
 
+    return JsonResponse(results,safe = False)
+
+@csrf_exempt
+def getRequestedPopular(request):
+    #we dont need to call models here.... we just see what elastic search has for us.
+    query = request.POST['query']
+
+    dict = {'0': query}
+    es = Elasticsearch(['es'])
+
+    if not es.indices.exists(index='listing_index'):
+        es.indices.create(index='listing_index', ignore=400)
+        results = {}
+    else:
+        results = es.search(index='listing_index', body={'query': {'query_string': {'query': query}}, 'size': 10})
+
+    ids = []
+
+    results = results['hits']['hits']
+
+    newResults = sorted(results, key=lambda k: int(k['_source']['numberBought']), reverse=True)
 
 
-    #results = results['hits']['hits']
-    #return JsonResponse(dict)
+    for each in newResults:
+        ids.append(each['_id'])
+
+    ids_dict = {'ids' : ids }
+
+    data = urllib.parse.urlencode(ids_dict).encode('utf-8')
+    req = urllib.request.Request('http://models:8000/api/v1/item/getSome', data)
+
+    print('hello!!!!!!!!!!!!!!')
+
+    handler = urllib.request.urlopen(req).read().decode('utf-8')
+    results = json.loads(handler)
+
     return JsonResponse(results,safe = False)
 
 
