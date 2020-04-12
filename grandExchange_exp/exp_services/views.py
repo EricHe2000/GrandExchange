@@ -204,7 +204,9 @@ def postItem(request):
     # send data our kafka queue
     producer = KafkaProducer(bootstrap_servers='kafka:9092')
     #get ID to pass into queue as well. possibly use for elastic search? (besides other fields)
+
     data_setup['id'] = results[0]['id']
+
 
     print(data_setup)
     producer.send('new-listings-topic', json.dumps(data_setup).encode('utf-8'))

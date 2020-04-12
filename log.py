@@ -2,10 +2,13 @@ from kafka import KafkaConsumer
 import json
 import time
 
-time.sleep(30)
+consumer = None
 
-consumer = KafkaConsumer('new-log-topic', group_id='indexer', bootstrap_servers=['kafka:9092'])
-                        #spark_topic
+while (consumer is None):
+    try:
+        consumer = KafkaConsumer('new-log-topic', group_id='indexer', bootstrap_servers=['kafka:9092'])
+    except:
+        print("still waiting")
 
 for message in consumer:
     #get the userID and the itemID to add it to the queue

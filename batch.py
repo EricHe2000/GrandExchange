@@ -3,9 +3,14 @@ import json
 from elasticsearch import Elasticsearch
 import time
 
-time.sleep(15)
-consumer = KafkaConsumer('new-listings-topic', group_id='listing-indexer', bootstrap_servers=['kafka:9092'])
-es = Elasticsearch(['es'])
+consumer, es = None, None
+
+while (es is None) or (consumer is None):
+    try:
+        consumer = KafkaConsumer('new-listings-topic', group_id='listing-indexer', bootstrap_servers=['kafka:9092'])
+        es = Elasticsearch(['es'])
+    except:
+        print('Still waiting')
 
 for message in consumer:
     # do something with the "message" in the queue... probably add to ES so we can process it later
@@ -15,3 +20,5 @@ for message in consumer:
 
     #commit changes w this command
     es.indices.refresh(index="listing_index")
+
+

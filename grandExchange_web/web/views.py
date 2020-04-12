@@ -113,12 +113,12 @@ def showResults(request):
             data2 = urllib.parse.urlencode(data).encode('utf-8')
             req = urllib.request.Request('http://exp:8000/api/v1/item/getRequestedItems', data=data2)
 
-            #try:
-            handler = urllib.request.urlopen(req).read().decode('utf-8')
-            results = json.loads(handler)
-            results = results['items']
-            #except HTTPError as e:
-            #    content = e.read()
+            try:
+                handler = urllib.request.urlopen(req).read().decode('utf-8')
+                results = json.loads(handler)
+                results = results['items']
+            except HTTPError as e:
+                return HttpResponse('Elastic Search container still loading... please reload in a few moments.')
 
             #return JsonResponse(results)
             return render(request, 'itemResults.html', {'dict': results, 'login': login})
@@ -139,9 +139,12 @@ def showResultsPopular(request):
             data2 = urllib.parse.urlencode(data).encode('utf-8')
             req = urllib.request.Request('http://exp:8000/api/v1/item/getRequestedPopular', data=data2)
 
-            handler = urllib.request.urlopen(req).read().decode('utf-8')
-            results = json.loads(handler)
-            results = results['items']
+            try:
+                handler = urllib.request.urlopen(req).read().decode('utf-8')
+                results = json.loads(handler)
+                results = results['items']
+            except HTTPError as e:
+                return HttpResponse('Elastic Search container still loading... please reload in a few moments.')
 
             return render(request, 'itemResults.html', {'dict': results, 'login': login})
         else:
