@@ -30,4 +30,4 @@ install: true
 script:
  #- docker exec -it models bash -c "python manage.py test"
  - docker ps -a
- - docker exec -it selenium-test bash -c "python selenium_test_script.py"
+ - docker exec -it selenium-test bash -c "python seleniumTest.py"
