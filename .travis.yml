@@ -1,0 +1,28 @@
+  
+language: python
+
+sudo: required
+
+services:
+ - docker
+
+before_install:
+ - docker pull mysql:5.7.14
+ - mkdir db
+- >
+  docker run --name mysql -d -e MYSQL_ROOT_PASSWORD='$3cureUS'
+  -v `pwd`/db:/var/lib/mysql mysql:5.7.14
+ - sleep 15
+ - >
+   docker run -it --name mysql-cmd --rm --link mysql:db mysql:5.7.14
+   mysql -uroot -p'$3cureUS' -h db -v -e
+   "CREATE DATABASE cs4501 CHARACTER SET utf8;
+   CREATE USER 'www'@'%' IDENTIFIED BY '\$3cureUS';
+   GRANT ALL PRIVILEGES ON *.* TO 'www'@'%';"
+
+before_script:
+  - docker-compose up -d
+
+script:
+ - docker exec -it models bash -c "python manage.py test"
+ - docker exec -it selenium-test bash -c "python selenium_test_script.py"
