@@ -23,9 +23,11 @@ before_install: # prepare mySQL database
     CREATE USER 'www'@'%' IDENTIFIED BY '\$3cureUS';
     GRANT ALL PRIVILEGES ON *.* TO 'www'@'%';"
   - docker-compose up -d
+  - docker ps -a
 
 install: true
 
 script:
  #- docker exec -it models bash -c "python manage.py test"
+ - docker ps -a
  - docker exec -it selenium-test bash -c "python selenium_test_script.py"
