@@ -22,7 +22,7 @@ before_install: # prepare mySQL database
     "CREATE DATABASE cs4501 CHARACTER SET utf8;
     CREATE USER 'www'@'%' IDENTIFIED BY '\$3cureUS';
     GRANT ALL PRIVILEGES ON *.* TO 'www'@'%';"
-  - docker-compose up
+  - docker-compose up -d
   - docker ps -a
 
 install: true
