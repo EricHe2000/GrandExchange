@@ -9,7 +9,7 @@ sudo: required
 services:
   - docker # default is docker 1.8.2 and docker-compose 1.4.2 (as of Oct. 2016)
 
-install: # prepare mySQL database
+before_install: # prepare mySQL database
   - docker pull mysql:5.7.14
   - mkdir db
   - >
@@ -22,10 +22,10 @@ install: # prepare mySQL database
     "CREATE DATABASE cs4501 CHARACTER SET utf8;
     CREATE USER 'www'@'%' IDENTIFIED BY '\$3cureUS';
     GRANT ALL PRIVILEGES ON *.* TO 'www'@'%';"
-
-before_script:
   - docker-compose up -d
 
+install: true
+
 script:
- - docker exec -it models bash -c "python manage.py test"
+ #- docker exec -it models bash -c "python manage.py test"
  - docker exec -it selenium-test bash -c "python selenium_test_script.py"
