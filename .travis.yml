@@ -1,24 +1,27 @@
-  
 language: python
+
+python:
+  - "3.5"
 
 sudo: required
 
+# if specific versions of docker or docker-compose are needed, see travis-CI docs
 services:
- - docker
+  - docker # default is docker 1.8.2 and docker-compose 1.4.2 (as of Oct. 2016)
 
-before_install:
- - docker pull mysql:5.7.14
- - mkdir db
-- >
-  docker run --name mysql -d -e MYSQL_ROOT_PASSWORD='$3cureUS'
-  -v `pwd`/db:/var/lib/mysql mysql:5.7.14
- - sleep 15
- - >
-   docker run -it --name mysql-cmd --rm --link mysql:db mysql:5.7.14
-   mysql -uroot -p'$3cureUS' -h db -v -e
-   "CREATE DATABASE cs4501 CHARACTER SET utf8;
-   CREATE USER 'www'@'%' IDENTIFIED BY '\$3cureUS';
-   GRANT ALL PRIVILEGES ON *.* TO 'www'@'%';"
+install: # prepare mySQL database
+  - docker pull mysql:5.7.14
+  - mkdir db
+  - >
+    docker run --name mysql -d -e MYSQL_ROOT_PASSWORD='$3cureUS'
+    -v `pwd`/db:/var/lib/mysql mysql:5.7.14
+  - sleep 10 # need to give time for mysql to start
+  - >
+    docker run -it --name mysql-cmd --rm --link mysql:db mysql:5.7.14
+    mysql -uroot -p'$3cureUS' -h db -v -e
+    "CREATE DATABASE cs4501 CHARACTER SET utf8;
+    CREATE USER 'www'@'%' IDENTIFIED BY '\$3cureUS';
+    GRANT ALL PRIVILEGES ON *.* TO 'www'@'%';"
 
 before_script:
   - docker-compose up -d
