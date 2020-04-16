@@ -93,7 +93,7 @@ services:
       - web:web
     volumes:
       - ./:/app
-    command: bash -c "pip install selenium"
+    command: bash -c "pip install selenium && python install.py"
 
 networks:
   backend:
