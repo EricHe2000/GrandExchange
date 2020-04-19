@@ -23,7 +23,8 @@ before_install:
     CREATE USER 'www'@'%' IDENTIFIED BY '\$3cureUS';
     GRANT ALL PRIVILEGES ON *.* TO 'www'@'%';"
 
-install: true
+install:
+- pip install -r requirements-travis.txt
 
 before_script: 
  - docker-compose up -d
