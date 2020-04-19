@@ -93,7 +93,7 @@ services:
       - service_mesh
     volumes:
       - ./:/app
-    command: bash -c "pip install selenium==3.14.1 && python tests.py"
+    command: bash -c "pip install selenium==3.14.1 && python tests.py && python loop.py"
 
 networks:
   backend:
