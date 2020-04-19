@@ -30,5 +30,5 @@ before_script:
  - docker-compose up -d
 
 script:
- #- docker exec -it models bash -c "python manage.py test"
+ - docker exec -it models bash -c "python manage.py test"
  - docker exec -it selenium-test bash -c "python tests.py"
