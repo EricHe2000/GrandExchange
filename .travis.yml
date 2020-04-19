@@ -30,4 +30,4 @@ before_script:
 
 script:
  #- docker exec -it models bash -c "python manage.py test"
- #- docker exec -it selenium-test bash -c "python seleniumTest.py"
+ - docker exec -it selenium-test bash -c "python tests.py"
