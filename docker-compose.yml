@@ -80,20 +80,20 @@ services:
   selenium-chrome:
     image: selenium/standalone-chrome
     container_name: selenium-chrome
-    links:
-      - web:web
+    networks:
+      - service_mesh
+      - public
     ports:
       - "4444:4444"
 
   selenium-test:
     image: tp33/django
     container_name: selenium-test
-    links:
-      - selenium-chrome:selenium-chrome
-      - web:web
+    networks:
+      - service_mesh
     volumes:
       - ./:/app
-    command: bash -c "pip install selenium && python install.py"
+    command: bash -c "pip install selenium==3.14.1 && python tests.py"
 
 networks:
   backend:
