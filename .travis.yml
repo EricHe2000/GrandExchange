@@ -21,7 +21,9 @@ before_install:
     mysql -uroot -p'$3cureUS' -h db -v -e
     "CREATE DATABASE cs4501 CHARACTER SET utf8;
     CREATE USER 'www'@'%' IDENTIFIED BY '\$3cureUS';
-    GRANT ALL PRIVILEGES ON *.* TO 'www'@'%';"
+    GRANT ALL PRIVILEGES ON *.* TO 'www'@'%';
+    grant all on cs4501.* to 'www'@'%';
+    grant all on test_cs4501.* to 'www'@'%';"
 
 install:
 - pip install -r requirements-travis.txt
@@ -30,5 +32,5 @@ before_script:
  - docker-compose up -d
 
 script:
- - python manage.py test
+ - docker exec -it models bash -c "python manage.py test"
  - docker exec -it selenium-test bash -c "python tests.py"
