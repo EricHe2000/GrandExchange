@@ -77,6 +77,27 @@ services:
       - ./:/app
     command: bash -c "python log.py"
 
+  selenium-chrome:
+    image: selenium/standalone-chrome
+    container_name: selenium-chrome
+    networks:
+      - service_mesh
+      - public
+    ports:
+      - "4444:4444"
+
+  selenium-test:
+    image: tp33/django
+    container_name: selenium-test
+    networks:
+      - service_mesh
+    volumes:
+      - ./:/app
+    command: bash -c "pip install selenium==3.14.1 && python tests.py && python loop.py"
+
+  haproxy:
+    image: haproxy
+    container_name: haproxy
 
 networks:
   backend:
