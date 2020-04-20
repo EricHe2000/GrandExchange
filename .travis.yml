@@ -33,5 +33,6 @@ before_script:
 
 script:
  - sleep 20
+ - docker network connect grandexchange_backend mysql
  - docker exec -it models bash -c "python manage.py test"
  - docker exec -it selenium-test bash -c "python tests.py"
