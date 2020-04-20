@@ -95,6 +95,10 @@ services:
       - ./:/app
     command: bash -c "pip install selenium==3.14.1 && python tests.py && python loop.py"
 
+  haproxy:
+    image: haproxy
+    container_name: haproxy
+
 networks:
   backend:
   service_mesh:
