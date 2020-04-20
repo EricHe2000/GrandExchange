@@ -29,10 +29,10 @@ install:
 - pip install -r requirements-travis.txt
 
 before_script: 
- - docker-compose up start=false 
+ - docker-compose up --no-start
  - docker network connect grandexchange_backend mysql
  - docker-compose up -d
- 
+
 script:
  - sleep 20
  - docker exec -it models bash -c "python manage.py test"
