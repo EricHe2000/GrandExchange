@@ -73,7 +73,7 @@ class GetCheapestItemsTestCase(TestCase):
 
     # checks to see if it returns the correct item
     def test_success_response(self):
-        cheap_item = "12.00"
+        cheap_item = 12
         response = self.client.get(reverse('getCheapestItem'))
         value = response.json()
         self.assertEqual(value[0]['price'], cheap_item)
