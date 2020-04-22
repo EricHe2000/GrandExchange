@@ -37,6 +37,17 @@ services:
       - ./grandExchange_web:/app
     command: "mod_wsgi-express start-server --reload-on-changes ./grandExchange_web/wsgi.py"
 
+  web2:
+    image: tp33/django
+    container_name: web2
+    networks:
+      - public
+    ports:
+      - "8004:8000"
+    volumes:
+      - ./grandExchange_web:/app
+    command: "mod_wsgi-express start-server --reload-on-changes ./grandExchange_web/wsgi.py"
+
   kafka:
     image: spotify/kafka
     container_name: kafka
@@ -98,9 +109,17 @@ services:
   haproxy:
     image: haproxy
     container_name: haproxy
+    links:
+      - web
+      - web2
+    volumes:
+      - ./haproxy://usr/local/etc/haproxy
+    ports:
+      - "80:80"
 
 networks:
   backend:
   service_mesh:
   public:
   batch_network:
+
