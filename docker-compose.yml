@@ -31,8 +31,6 @@ services:
     container_name: web
     networks:
       - public
-    ports:
-      - "8000:8000"
     volumes:
       - ./grandExchange_web:/app
     command: "mod_wsgi-express start-server --reload-on-changes ./grandExchange_web/wsgi.py"
@@ -42,8 +40,6 @@ services:
     container_name: web2
     networks:
       - public
-    ports:
-      - "8004:8000"
     volumes:
       - ./grandExchange_web:/app
     command: "mod_wsgi-express start-server --reload-on-changes ./grandExchange_web/wsgi.py"
@@ -109,13 +105,12 @@ services:
   haproxy:
     image: haproxy
     container_name: haproxy
-    links:
-      - web
-      - web2
+    networks:
+      - public
     volumes:
       - ./haproxy://usr/local/etc/haproxy
     ports:
-      - "80:80"
+      - "8000:8000"
 
 networks:
   backend:
