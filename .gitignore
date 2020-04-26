@@ -4,3 +4,4 @@
 *.idea
 /migrations/
 db.sqlite3
+log.txt
