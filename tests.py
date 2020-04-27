@@ -13,12 +13,14 @@ class BasicWebTestCase(unittest.TestCase):
 
     #Test that the link leads to correct page with title
     def test_title_check(self):
+        print("TitleTest")
         driver = self.driver
         driver.get("http://web:8000")
         self.assertEqual(driver.title, "GrandExchange")
         self.assertFalse(driver.title == "Error lol")
     
-    def login(self):
+    def test_login(self):
+        print("creatingLogging")
         driver = self.driver
         driver.get("http://web:8000/create/user")
         driver.find_element_by_name('name').send_keys('Eric')
@@ -32,7 +34,8 @@ class BasicWebTestCase(unittest.TestCase):
         driver.get("http://web:8000/")
         self.assertTrue("Logout" in driver.page_source)
     
-    def createListing(self):
+    def test_createListing(self):
+        print("creatingListingRunning")
         driver = self.driver
         driver.get("http://web:8000/create/item")
         driver.find_element_by_name('title').send_keys('Test Item')
@@ -42,3 +45,7 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_xpath("//input[@type='submit'][@value='Ok']").click()
         driver.get("http://web:8000/")
         self.assertTrue("Test Item" in driver.page_source)
+
+if __name__ == "__main__":
+        print("working")
+        unittest.main()
