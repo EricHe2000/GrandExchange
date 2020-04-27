@@ -1,5 +1,6 @@
 import unittest
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 class BasicWebTestCase(unittest.TestCase):
@@ -12,7 +13,39 @@ class BasicWebTestCase(unittest.TestCase):
 
     #Test that the link leads to correct page with title
     def test_title_check(self):
+        print("TitleTest")
         driver = self.driver
         driver.get("http://web:8000")
         self.assertEqual(driver.title, "GrandExchange")
         self.assertFalse(driver.title == "Error lol")
+    
+    def test_login(self):
+        print("creatingLogging")
+        driver = self.driver
+        driver.get("http://web:8000/create/user")
+        driver.find_element_by_name('name').send_keys('Eric')
+        driver.find_element_by_name('email').send_keys('eriche2000@gmail.com')
+        driver.find_element_by_name('age').send_keys('21')
+        driver.find_element_by_name('username').send_keys('12345')
+        driver.find_element_by_name('password').send_keys('54321')
+        driver.implicitly_wait(20)
+        driver.find_element_by_name('username').send_keys('12345')
+        driver.find_element_by_name('password').send_keys('54321')
+        driver.get("http://web:8000/")
+        self.assertTrue("Logout" in driver.page_source)
+    
+    def test_createListing(self):
+        print("creatingListingRunning")
+        driver = self.driver
+        driver.get("http://web:8000/create/item")
+        driver.find_element_by_name('title').send_keys('Test Item')
+        driver.find_element_by_name('description').send_keys('Running a test')
+        driver.find_element_by_name('price').send_keys('404')
+        driver.find_element_by_name('numberBought').send_keys('3')
+        driver.find_element_by_xpath("//input[@type='submit'][@value='Ok']").click()
+        driver.get("http://web:8000/")
+        self.assertTrue("Test Item" in driver.page_source)
+
+if __name__ == "__main__":
+        print("working")
+        unittest.main()
