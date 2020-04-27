@@ -18,7 +18,17 @@ class BasicWebTestCase(unittest.TestCase):
         driver.get("http://web:8000")
         self.assertEqual(driver.title, "Grand Exchange")
         self.assertFalse(driver.title == "Error lol")
-    
+
+    def test_not_logged_in(self):
+
+        driver = self.driver
+        driver.get("http://web:8000/create/user")
+        print("not logged in")
+        print(driver.title)
+
+        self.assertEqual(driver.title, "Grand Exchange")
+
+    '''
     def test_login(self):
         print("creatingLogging")
         driver = self.driver
@@ -62,6 +72,8 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_link_text('Logout').click()
 
         self.assertTrue("Already have one? Login Here!" in driver.page_source)
+        
+    '''
 
 if __name__ == "__main__":
         print("working")
