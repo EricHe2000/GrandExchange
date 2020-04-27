@@ -21,15 +21,8 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_name('username').send_keys('root')
         driver.find_element_by_name('password').send_keys('pass')
         driver.find_element_by_name("login_button").click()
-        driver.get("http://web:8000")
 
-    #Test that the link leads to correct page with title
-    def test_title_check(self):
-        print("TitleTest")
-        driver = self.driver
-        driver.get("http://web:8000")
-        self.assertEqual(driver.title, "Grand Exchange")
-        self.assertFalse(driver.title == "Error lol")
+
 
     #Test to see if when trying to make a new item ... redirects to login page
     def test_not_logged_in(self):
@@ -56,8 +49,6 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_name('password').send_keys('54321')
         driver.find_element_by_name("login_button").click()
 
-        print(driver.page_source)
-
         self.assertTrue("Logout" in driver.page_source)
 
     '''
@@ -82,6 +73,16 @@ class BasicWebTestCase(unittest.TestCase):
         driver.get("http://web:8000/")
         self.assertTrue("Test Item" in driver.page_source)
     '''
+
+    # Test that the link leads to correct page with title
+    def test_title_check(self):
+        print("TitleTest")
+        driver = self.driver
+        driver.get("http://web:8000")
+
+        print(driver.title)
+        self.assertEqual(driver.title, "Grand Exchange")
+        self.assertFalse(driver.title == "Error lol")
 
 
     def test_logout(self):
