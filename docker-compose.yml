@@ -100,7 +100,7 @@ services:
       - service_mesh
     volumes:
       - ./:/app
-    command: bash -c "pip install selenium==3.14.1 && python tests.py && python loop.py"
+    command: bash -c "pip install selenium==3.14.1 && python loop.py"
 
   haproxy:
     image: haproxy
