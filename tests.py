@@ -82,8 +82,7 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_xpath("//input[@type='submit'][@value='Ok']").click()
         driver.get("http://web:8000/")
         self.assertTrue("Test Item" in driver.page_source)
-    '''
-
+    
     def test_logout(self):
         driver = self.driver
         driver.get("http://web:8000")
@@ -97,6 +96,8 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_id('logout').click()
 
         self.assertEqual("Grand Exchange" , driver.title)
+        
+    '''
         
 
 if __name__ == "__main__":
