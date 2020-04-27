@@ -71,7 +71,7 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_name('password').send_keys('54321')
         driver.find_element_by_name("login_button").click()
 
-        driver.find_element_by_link_text('Create Listing').click()
+        driver.find_element_by_id('createlisting').click()
 
         driver.find_element_by_name('title').send_keys('Test Item')
         driver.find_element_by_name('description').send_keys('Running a test')
@@ -85,14 +85,14 @@ class BasicWebTestCase(unittest.TestCase):
     def test_logout(self):
         driver = self.driver
         driver.get("http://web:8000")
-        driver.find_element_by_link_text('Already have one? Login Here!').click()
+        driver.find_element_by_id('login').click()
 
         driver.find_element_by_name("username").send_keys("root")
         driver.find_element_by_name("password").send_keys("pass")
 
         driver.find_element_by_name("login_button").click()
 
-        driver.find_element_by_link_text('Logout').click()
+        driver.find_element_by_id('Logout').click()
 
         self.assertTrue("Already have one? Login Here!" in driver.page_source)
         

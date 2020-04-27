@@ -36,10 +36,10 @@
       <div align = center style="margin-top:35px">
         {%if not login%}
           <a href="/create/user/" class="btn btn-primary btn-lg">Create an Account now!</a>
-          <a href="/login/" class="btn btn-primary btn-lg">Already have one? Login Here!</a>
+          <a href="/login/" class="btn btn-primary btn-lg" id="login">Already have one? Login Here!</a>
         {% endif %}
         {%if login%}
-          <a href="/create/item/" class="btn btn-primary btn-lg">Create Listing</a>
+          <a href="/create/item/" class="btn btn-primary btn-lg" id="createlisting">Create Listing</a>
           <a href="/items/" class="btn btn-primary btn-lg">View Listings</a>
           <a href="/profile/" class="btn btn-primary btn-lg"> Update Profile </a>
         {% endif %}
