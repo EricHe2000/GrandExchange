@@ -11,6 +11,18 @@ class BasicWebTestCase(unittest.TestCase):
             command_executor='http://selenium-chrome:4444/wd/hub',
             desired_capabilities=DesiredCapabilities.CHROME)
 
+        self.driver.implicitly_wait(10)
+        #make a reusable user for testing
+        driver = self.driver
+        driver.get("http://web:8000/create/user")
+        driver.find_element_by_name('name').send_keys('admin')
+        driver.find_element_by_name('email').send_keys('admin@gmail.com')
+        driver.find_element_by_name('age').send_keys('21')
+        driver.find_element_by_name('username').send_keys('root')
+        driver.find_element_by_name('password').send_keys('pass')
+        driver.find_element_by_name("login_button").click()
+        driver.get("http://web:8000")
+
     #Test that the link leads to correct page with title
     def test_title_check(self):
         print("TitleTest")
@@ -42,17 +54,25 @@ class BasicWebTestCase(unittest.TestCase):
         driver.implicitly_wait(20)
         driver.find_element_by_name('username').send_keys('12345')
         driver.find_element_by_name('password').send_keys('54321')
-        driver.find_element_by_name("login_user").click()
+        driver.find_element_by_name("login_button").click()
 
         print(driver.page_source)
 
         self.assertTrue("Logout" in driver.page_source)
 
-    '''
+    #test to see if a logged in user can make an item
     def test_createListing(self):
         print("creatingListingRunning")
+
         driver = self.driver
-        driver.get("http://web:8000/create/item")
+        driver.get("http://web:8000/login")
+
+        driver.find_element_by_name('username').send_keys('12345')
+        driver.find_element_by_name('password').send_keys('54321')
+        driver.find_element_by_name("login_button").click()
+
+        driver.find_element_by_link_text('Create Listing').click()
+
         driver.find_element_by_name('title').send_keys('Test Item')
         driver.find_element_by_name('description').send_keys('Running a test')
         driver.find_element_by_name('price').send_keys('404')
@@ -65,18 +85,17 @@ class BasicWebTestCase(unittest.TestCase):
     def test_logout(self):
         driver = self.driver
         driver.get("http://web:8000")
-        driver.find_element_by_link_text('Create an Account now!').click()
+        driver.find_element_by_link_text('Already have one? Login Here!').click()
 
-        driver.find_element_by_name("username").send_keys("dustin")
-        driver.find_element_by_name("password").send_keys("nguyen")
+        driver.find_element_by_name("username").send_keys("root")
+        driver.find_element_by_name("password").send_keys("pass")
 
-        driver.find_element_by_name("submit").click()
+        driver.find_element_by_name("login_button").click()
 
         driver.find_element_by_link_text('Logout').click()
 
         self.assertTrue("Already have one? Login Here!" in driver.page_source)
         
-    '''
 
 if __name__ == "__main__":
         print("working")
