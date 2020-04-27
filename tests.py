@@ -11,6 +11,28 @@ class BasicWebTestCase(unittest.TestCase):
             command_executor='http://selenium-chrome:4444/wd/hub',
             desired_capabilities=DesiredCapabilities.CHROME)
 
+    #Test that the link leads to correct page with title
+    def test_title_check(self):
+        print("TitleTest")
+        driver = self.driver
+        driver.get("http://web:8000")
+        self.assertEqual(driver.title, "Grand Exchange")
+        self.assertFalse(driver.title == "Error lol")
+
+    def test_not_logged_in(self):
+
+        driver = self.driver
+        driver.get("http://web:8000/create/user")
+        print("not logged in")
+        print(driver.title)
+
+        self.assertEqual(driver.title, "Grand Exchange")
+    '''
+    def setUp(self):
+        self.driver = webdriver.Remote(
+            command_executor='http://selenium-chrome:4444/wd/hub',
+            desired_capabilities=DesiredCapabilities.CHROME)
+
         self.driver.implicitly_wait(10)
         #make a reusable user for testing
         driver = self.driver
@@ -23,7 +45,7 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_name("login_button").click()
         driver.get("http://web:8000")
 
-    '''
+    
     #Test that the link leads to correct page with title
     def test_title_check(self):
         print("TitleTest")
@@ -31,7 +53,7 @@ class BasicWebTestCase(unittest.TestCase):
         driver.get("http://web:8000")
         self.assertEqual(driver.title, "Grand Exchange")
         self.assertFalse(driver.title == "Error lol")
-    '''
+    
 
     #Test to see if when trying to make a new item ... redirects to login page
     def test_not_logged_in(self):
@@ -61,7 +83,7 @@ class BasicWebTestCase(unittest.TestCase):
 
         self.assertTrue("Logout" in driver.page_source)
 
-    '''
+    
     #test to see if a logged in user can make an item
     def test_createListing(self):
         print("creatingListingRunning")
