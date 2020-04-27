@@ -19,16 +19,16 @@ class BasicWebTestCase(unittest.TestCase):
         self.assertEqual(driver.title, "Grand Exchange")
         self.assertFalse(driver.title == "Error lol")
 
+    #Test to see if when trying to make a new item ... redirects to login page
     def test_not_logged_in(self):
 
         driver = self.driver
         driver.get("http://web:8000/create/user")
         print("not logged in")
-        print(driver.title)
 
-        self.assertEqual(driver.title, "Grand Exchange")
+        self.assertTrue("Login" in driver.page_source)
 
-    '''
+
     def test_login(self):
         print("creatingLogging")
         driver = self.driver
@@ -38,14 +38,14 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_name('age').send_keys('21')
         driver.find_element_by_name('username').send_keys('12345')
         driver.find_element_by_name('password').send_keys('54321')
-        driver.find_element_by_name("submit").click()
+        driver.find_element_by_name("ok").click()
         driver.implicitly_wait(20)
         driver.find_element_by_name('username').send_keys('12345')
         driver.find_element_by_name('password').send_keys('54321')
-        driver.get("http://web:8000/")
+        driver.find_element_by_name("login").click()
         self.assertFalse("Logout" in driver.page_source)
 
-
+    '''
     def test_createListing(self):
         print("creatingListingRunning")
         driver = self.driver
