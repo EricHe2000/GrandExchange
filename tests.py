@@ -28,19 +28,18 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_name('age').send_keys('21')
         driver.find_element_by_name('username').send_keys('12345')
         driver.find_element_by_name('password').send_keys('54321')
+        driver.find_element_by_name("submit").click()
         driver.implicitly_wait(20)
         driver.find_element_by_name('username').send_keys('12345')
         driver.find_element_by_name('password').send_keys('54321')
         driver.get("http://web:8000/")
-        #change this
-        print(driver.page_source)
-        self.assertTrue("Logout" in driver.page_source)
+        self.assertFalse("Logout" in driver.page_source)
 
 
     def test_createListing(self):
         print("creatingListingRunning")
         driver = self.driver
-        driver.get("http://web:8000/create/item/")
+        driver.get("http://web:8000/create/item")
         driver.find_element_by_name('title').send_keys('Test Item')
         driver.find_element_by_name('description').send_keys('Running a test')
         driver.find_element_by_name('price').send_keys('404')
@@ -49,6 +48,20 @@ class BasicWebTestCase(unittest.TestCase):
         driver.get("http://web:8000/")
         self.assertTrue("Test Item" in driver.page_source)
 
+
+    def test_logout(self):
+        driver = self.driver
+        driver.get("http://web:8000")
+        driver.find_element_by_link_text('Create an Account now!').click()
+
+        driver.find_element_by_name("username").send_keys("dustin")
+        driver.find_element_by_name("password").send_keys("nguyen")
+
+        driver.find_element_by_name("submit").click()
+
+        driver.find_element_by_link_text('Logout').click()
+
+        self.assertTrue("Already have one? Login Here!" in driver.page_source)
 
 if __name__ == "__main__":
         print("working")
