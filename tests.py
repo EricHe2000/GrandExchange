@@ -60,6 +60,7 @@ class BasicWebTestCase(unittest.TestCase):
 
         self.assertTrue("Logout" in driver.page_source)
 
+    '''
     #test to see if a logged in user can make an item
     def test_createListing(self):
         print("creatingListingRunning")
@@ -80,6 +81,7 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_xpath("//input[@type='submit'][@value='Ok']").click()
         driver.get("http://web:8000/")
         self.assertTrue("Test Item" in driver.page_source)
+    '''
 
 
     def test_logout(self):
