@@ -23,12 +23,12 @@ class BasicWebTestCase(unittest.TestCase):
     def test_not_logged_in(self):
 
         driver = self.driver
-        driver.get("http://web:8000/create/user")
+        driver.get("http://web:8000/create/item")
         print("not logged in")
 
         self.assertTrue("Login" in driver.page_source)
 
-
+    #test when a user logs in , the logout button appears
     def test_login(self):
         print("creatingLogging")
         driver = self.driver
@@ -38,12 +38,15 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_name('age').send_keys('21')
         driver.find_element_by_name('username').send_keys('12345')
         driver.find_element_by_name('password').send_keys('54321')
-        driver.find_element_by_name("ok").click()
+        driver.find_element_by_name("login_button").click()
         driver.implicitly_wait(20)
         driver.find_element_by_name('username').send_keys('12345')
         driver.find_element_by_name('password').send_keys('54321')
-        driver.find_element_by_name("login").click()
-        self.assertFalse("Logout" in driver.page_source)
+        driver.find_element_by_name("login_user").click()
+
+        print(driver.page_source)
+
+        self.assertTrue("Logout" in driver.page_source)
 
     '''
     def test_createListing(self):

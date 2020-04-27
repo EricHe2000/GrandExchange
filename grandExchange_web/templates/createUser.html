@@ -35,7 +35,7 @@
         <form action="/create/user/" method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="OK">
+            <input type="submit" id="login_button" value="OK">
         </form>
     </header>
 
