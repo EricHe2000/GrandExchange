@@ -96,7 +96,7 @@ class BasicWebTestCase(unittest.TestCase):
 
         driver.find_element_by_id('logout').click()
 
-        self.assertTrue("Already have one? Login Here!" in driver.page_source)
+        self.assertEqual("Grand Exchange" , driver.title)
         
 
 if __name__ == "__main__":
