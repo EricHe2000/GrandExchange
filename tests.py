@@ -71,7 +71,7 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_name('password').send_keys('pass')
         driver.find_element_by_name("login_button").click()
 
-        driver.find_element_by_id('createlisting').click()
+        driver.get("http://web:8000/create/item")
 
         driver.find_element_by_name('title').send_keys('Test Item')
         driver.find_element_by_name('description').send_keys('Running a test')
