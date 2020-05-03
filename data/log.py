@@ -17,5 +17,5 @@ for message in consumer:
     #check to make sure this works lol
     user_id = item['user_id']
     item_id = item['item_id']
-    with open('log.txt', 'a') as file:
+    with open('access.txt', 'a') as file:
         file.write(str(user_id) + '\t' + str(item_id) + '\n')
