@@ -81,8 +81,8 @@ services:
     networks:
       - batch_network
     volumes:
-      - ./:/app
-    command: bash -c "python data/log.py"
+      - ./data:/app
+    command: bash -c "python log.py"
 
   selenium-chrome:
     image: selenium/standalone-chrome
