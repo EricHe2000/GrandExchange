@@ -38,7 +38,7 @@ itemPairstoClickedUsers = itemPairs.groupByKey().mapValues(list)
 
 output = itemPairstoClickedUsers.collect()
 for item_pair, user_list in output:
-    print ("item_pair %s user_list %s" % (str(item_pair), str(user_list)))
+    print ("The pair of items: " + str(item_pair) + 'has been seen by users: ' + str(user_list))
 
 print('end of 4')
 
@@ -48,10 +48,9 @@ item_pair_map = itemPairstoClickedUsers.flatMapValues(lambda x: x).map(lambda pa
 count = item_pair_map.reduceByKey(lambda x,y: int(x)+int(y)).filter(lambda x: x[1] >= 3)
 output = count.collect()
 for item_pair, count in output:
-    print ("item_pair %s count %d" % (str(item_pair), count))
+    print ('The item pair: ' + str(item_pair) + ' has been seen by ' + str(count) + ' unique users')
 
 print('end of 5 and 6')
-
 
 
 '''
