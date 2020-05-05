@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/v1/user/login', home.loginUser, name='loginUser'),
     path('api/v1/item/create', home.createItem, name='createItem'),
     path('api/v1/item/createRec', home.createRec, name='createRec'),
+    path('api/v1/item/resetRecs', home.resetRecs, name='resetRecs'),
 
     path('api/v1/user/<int:userid>/', home.getUser, name='getUser'),
     path('api/v1/item/<int:itemid>/', home.getItem, name='getItem'),

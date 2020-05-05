@@ -12,6 +12,11 @@ import json
 6. Filter out any results where less than 3 users co-clicked the same pair of items
 
 '''
+
+req = urllib.request.Request('http://models:8000/api/v1/item/resetRecs')
+handler = urllib.request.urlopen(req).read().decode("utf-8")
+
+
 sc = SparkContext("spark://spark-master:7077", "PopularItems")
 data = sc.textFile("/tmp/data/access.txt", 2)     # each worker loads a piece of the data file
 pairs = data.map(lambda line: line.split("\t"))   # tell each worker to split each line of it's partition

@@ -10,6 +10,7 @@ from .forms import UserForm, ItemForm, LoginForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password, check_password
 import json
+import MySQLdb
 from ast import literal_eval
 
 def createUser(request):
@@ -145,6 +146,15 @@ def createRec(request):
 		return JsonResponse(python_dict, safe=False)
 	else:
 		return JsonResponse({'Error': 'No Post request, try again.'})
+
+def resetRecs(request):
+	items = Item.objects.all()
+
+	for item in items:
+		item.recommendation = None
+		item.save()
+
+	return JsonResponse({"Success" : "It worked"})
 
 def getUser(request, userid):
 	user = User.objects.all().filter(pk=userid)
