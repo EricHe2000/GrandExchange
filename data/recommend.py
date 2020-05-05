@@ -1,5 +1,6 @@
 from pyspark import SparkContext
-
+import urllib.request
+import urllib.parse
 '''
 1. Read data in as pairs of (user_id, item_id clicked on by the user)
 2. Group data into (user_id, list of item ids they clicked on)
@@ -47,11 +48,13 @@ print('end of 4')
 item_pair_map = itemPairstoClickedUsers.flatMapValues(lambda x: x).map(lambda pair: (pair[0], 1))
 count = item_pair_map.reduceByKey(lambda x,y: int(x)+int(y)).filter(lambda x: x[1] >= 3)
 output = count.collect()
-for item_pair, count in output:
+data_setup = {}
+for item_pair, count in output: #item_pair is tuple
     print ('The item pair: ' + str(item_pair) + ' has been seen by ' + str(count) + ' unique users')
-
-print('end of 5 and 6')
-
+    data_setup.update({item_pair[0]:item_pair[1]})
+print(data_setup)
+data = urllib.parse.urlencode(data_setup).encode('utf-8')
+req = urllib.request.Request('http://models:8000/api/v1/item/rec', data)
 
 '''
 pages = pairs.map(lambda pair: (pair[1], 1))      # re-layout the data to ignore the user id

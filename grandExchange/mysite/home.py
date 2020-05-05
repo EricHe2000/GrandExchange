@@ -9,6 +9,9 @@ from django.core import serializers
 from .forms import UserForm, ItemForm, LoginForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password, check_password
+import json
+from ast import literal_eval
+
 def createUser(request):
 	response = {}
 	response['ok'] = False
@@ -121,6 +124,25 @@ def createItem(request):
 		items = Item.objects.all().filter(pk=Item.objects.all().count()).values()
 		items_list = list(items)
 		return JsonResponse(items_list, safe=False)
+	else:
+		return JsonResponse({'Error': 'No Post request, try again.'})
+
+def createRec(request):
+	if request.method == 'POST':
+		recs = request.body.decode('utf-8')
+		python_dict = literal_eval(recs)
+		for key in python_dict:
+			print("pk",key)
+			print("value", python_dict[key])
+			item = Item.objects.all().filter(pk=int(key))
+			cur = item.values("recommendation")[0]['recommendation']
+			if cur is None: 
+				item.update(recommendation=python_dict[key])
+			elif str(python_dict[key]) not in str(cur): # check for double digits later
+				newValue = str(cur) + ", " + str(python_dict[key])
+				print(cur)
+				item.update(recommendation=newValue)
+		return JsonResponse(python_dict, safe=False)
 	else:
 		return JsonResponse({'Error': 'No Post request, try again.'})
 

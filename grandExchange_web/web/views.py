@@ -57,6 +57,7 @@ def detail(request,num=1):
 
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     resp = json.loads(resp_json)
+    print(resp)
     return render(request, 'item.html',context = {'dict':resp})
 
 def createUser(request):

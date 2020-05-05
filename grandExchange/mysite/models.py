@@ -8,7 +8,7 @@ class Item(models.Model):
     description = models.TextField(max_length=150)
     price = models.PositiveIntegerField()
     numberBought = models.IntegerField(default=0)
-
+    recommendation = models.CharField(max_length=100,blank = True,null = True)
 
 class User(models.Model):
     name = models.CharField(max_length=50)
