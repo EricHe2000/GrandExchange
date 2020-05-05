@@ -130,7 +130,7 @@ def createItem(request):
 def createRec(request):
 	if request.method == 'POST':
 		recs = request.body.decode('utf-8')
-		python_dict = literal_eval(recs)
+		python_dict = json.loads(recs)
 		for key in python_dict:
 			print("pk",key)
 			print("value", python_dict[key])
