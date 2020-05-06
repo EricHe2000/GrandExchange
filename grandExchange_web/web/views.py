@@ -179,7 +179,7 @@ def createListing(request):
     else:
         return redirect("login")
 
-    return render(request, 'createListing.html', {'form': form})
+    return render(request, 'createListing.html', {'form': form,'login':login})
 
 
 """
