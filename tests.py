@@ -50,10 +50,12 @@ class BasicWebTestCase(unittest.TestCase):
         print("creatingLogging")
         driver = self.driver
         driver.get("http://web:8000/create/item")
+        driver.implicitly_wait(10)
         driver.find_element_by_name('title').send_keys('Test Item')
         driver.find_element_by_name('description').send_keys('Test Description')
         driver.find_element_by_name('price').send_keys('11')
         driver.find_element_by_name('numberBought').send_keys('1')
+        driver.implicitly_wait(10)
         driver.find_element_by_xpath("//input[@type='submit'][@value='OK']").click()
         driver.implicitly_wait(20)
         self.assertTrue("Recommendations" in driver.page_source)
