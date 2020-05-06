@@ -7,9 +7,11 @@ class BasicWebTestCase(unittest.TestCase):
     # setUp method is called before each test in this class
 
     def setUp(self):
+        print("driver init")
         self.driver = webdriver.Remote(
             command_executor='http://selenium-chrome:4444/wd/hub',
             desired_capabilities=DesiredCapabilities.CHROME)
+        print("driver correct")
 
     #Test that the link leads to correct page with title
     def test_title_check(self):
@@ -19,12 +21,10 @@ class BasicWebTestCase(unittest.TestCase):
         self.assertEqual(driver.title, "Grand Exchange")
 
     def test_not_logged_in(self):
-
         driver = self.driver
         driver.get("http://web:8000/create/user")
         print("not logged in")
         print(driver.title)
-
         self.assertEqual(driver.title, "Grand Exchange")
 
     def test_login(self):
@@ -41,7 +41,6 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_name('username').send_keys('12345')
         driver.find_element_by_name('password').send_keys('54321')
         driver.find_element_by_name("login_button").click()
-
 
         self.assertTrue("Logout" in driver.page_source)
     '''
