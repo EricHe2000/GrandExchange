@@ -13,12 +13,10 @@ from elasticsearch import Elasticsearch
 @csrf_exempt
 def getItem(request,num=1):
 
-
     user_id = request.POST['user_id']
     item_id = request.POST['item_id']
 
     data = {'user_id': user_id, 'item_id': item_id}
-
 
     producer = KafkaProducer(bootstrap_servers=['kafka:9092'])
     producer.send('new-log-topic', json.dumps(data).encode('utf-8'))
@@ -27,8 +25,17 @@ def getItem(request,num=1):
     req = urllib.request.Request('http://models:8000/api/v1/item/'+str(num))
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     results = json.loads(resp_json)
-
-    return JsonResponse(results)
+    
+    recommend = []
+    if results['recommendation'] is not None:
+        rec = results['recommendation'].split(", ")
+        for i in rec:
+            req = urllib.request.Request('http://models:8000/api/v1/item/'+i)
+            resp_json = urllib.request.urlopen(req).read().decode('utf-8')
+            recommend.append(json.loads(resp_json))
+    Dict = { 'item': results, 'rec': recommend} 
+    print(Dict)
+    return JsonResponse(Dict)
 
 
 

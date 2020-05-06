@@ -1,0 +1,1 @@
+while true; do bin/spark-submit --master spark://spark-master:7077 --total-executor-cores 2 --executor-memory 512m /tmp/data/recommend.py; echo "Executed script, waiting for a minute to execute again." ; sleep 60; done

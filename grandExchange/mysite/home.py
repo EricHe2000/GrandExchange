@@ -9,6 +9,10 @@ from django.core import serializers
 from .forms import UserForm, ItemForm, LoginForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.hashers import make_password, check_password
+import json
+import MySQLdb
+from ast import literal_eval
+
 def createUser(request):
 	response = {}
 	response['ok'] = False
@@ -123,6 +127,35 @@ def createItem(request):
 		return JsonResponse(items_list, safe=False)
 	else:
 		return JsonResponse({'Error': 'No Post request, try again.'})
+
+def createRec(request):
+	if request.method == 'POST':
+		recs = request.body.decode('utf-8')
+		python_dict = json.loads(recs)
+		for key in python_dict:
+			if key is not python_dict[key]:
+				print("pk",key)
+				print("value", python_dict[key])
+				item = Item.objects.all().filter(pk=int(key))
+				cur = item.values("recommendation")[0]['recommendation']
+				if cur is None: 
+					item.update(recommendation=python_dict[key])
+				elif str(python_dict[key]) not in str(cur): # check for double digits later
+					newValue = str(cur) + ", " + str(python_dict[key])
+					print(cur)
+					item.update(recommendation=newValue)
+		return JsonResponse(python_dict, safe=False)
+	else:
+		return JsonResponse({'Error': 'No Post request, try again.'})
+
+def resetRecs(request):
+	items = Item.objects.all()
+
+	for item in items:
+		item.recommendation = None
+		item.save()
+
+	return JsonResponse({"Success" : "It worked"})
 
 def getUser(request, userid):
 	user = User.objects.all().filter(pk=userid)

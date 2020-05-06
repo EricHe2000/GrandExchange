@@ -44,10 +44,10 @@ def isLoggedIn(request):
     return login
 
 def detail(request,num=1):
-
+    login = isLoggedIn(request)
     item_id = num
     user_id = request.COOKIES.get('user_id')
-
+    
     data = {'user_id' : user_id, 'item_id' : item_id}
     data2 = urllib.parse.urlencode(data).encode('utf-8')
 
@@ -57,7 +57,8 @@ def detail(request,num=1):
 
     resp_json = urllib.request.urlopen(req).read().decode('utf-8')
     resp = json.loads(resp_json)
-    return render(request, 'item.html',context = {'dict':resp})
+    print(resp)
+    return render(request, 'item.html',context = {'dict':resp,'login':login})
 
 def createUser(request):
     login = isLoggedIn(request)
@@ -178,7 +179,7 @@ def createListing(request):
     else:
         return redirect("login")
 
-    return render(request, 'createListing.html', {'form': form})
+    return render(request, 'createListing.html', {'form': form,'login':login})
 
 
 """
