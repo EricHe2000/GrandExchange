@@ -17,7 +17,6 @@ class BasicWebTestCase(unittest.TestCase):
         driver = self.driver
         driver.get("http://web:8000")
         self.assertEqual(driver.title, "Grand Exchange")
-        self.assertFalse(driver.title == "Error lol")
 
     def test_not_logged_in(self):
 
