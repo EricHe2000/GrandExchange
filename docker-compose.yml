@@ -8,8 +8,8 @@ services:
     networks:
       - backend
       - service_mesh
-    ports:
-      - "8001:8000"
+    expose:
+      - "8000"
     volumes:
       - ./grandExchange:/app
     command: bash -c "python manage.py makemigrations mysite && python manage.py migrate --run-syncdb && python manage.py loaddata fixtures.json && mod_wsgi-express start-server --reload-on-changes ./mysite/wsgi.py"
@@ -20,8 +20,8 @@ services:
     networks:
       - service_mesh
       - public
-    ports:
-      - "8002:8000"
+    expose:
+      - "8000"
     volumes:
       - ./grandExchange_exp:/app
     command: "mod_wsgi-express start-server --reload-on-changes ./grandExchange_exp/wsgi.py"
@@ -110,7 +110,7 @@ services:
     volumes:
       - ./haproxy://usr/local/etc/haproxy
     ports:
-      - "8000:8000"
+      - "80:8000"
 
   spark-master:
     image: gettyimages/spark

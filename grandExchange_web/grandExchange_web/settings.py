@@ -23,7 +23,7 @@ PROJECT_DIR = BASE_DIR
 SECRET_KEY = '94a1)blxu7vjwo2yxb1z&3+&afize=mzgpod*#*zbb665z1vdg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 

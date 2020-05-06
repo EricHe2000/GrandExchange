@@ -133,16 +133,17 @@ def createRec(request):
 		recs = request.body.decode('utf-8')
 		python_dict = json.loads(recs)
 		for key in python_dict:
-			print("pk",key)
-			print("value", python_dict[key])
-			item = Item.objects.all().filter(pk=int(key))
-			cur = item.values("recommendation")[0]['recommendation']
-			if cur is None: 
-				item.update(recommendation=python_dict[key])
-			elif str(python_dict[key]) not in str(cur): # check for double digits later
-				newValue = str(cur) + ", " + str(python_dict[key])
-				print(cur)
-				item.update(recommendation=newValue)
+			if key is not python_dict[key]:
+				print("pk",key)
+				print("value", python_dict[key])
+				item = Item.objects.all().filter(pk=int(key))
+				cur = item.values("recommendation")[0]['recommendation']
+				if cur is None: 
+					item.update(recommendation=python_dict[key])
+				elif str(python_dict[key]) not in str(cur): # check for double digits later
+					newValue = str(cur) + ", " + str(python_dict[key])
+					print(cur)
+					item.update(recommendation=newValue)
 		return JsonResponse(python_dict, safe=False)
 	else:
 		return JsonResponse({'Error': 'No Post request, try again.'})

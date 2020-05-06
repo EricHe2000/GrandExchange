@@ -27,6 +27,24 @@ class BasicWebTestCase(unittest.TestCase):
         print(driver.title)
 
         self.assertEqual(driver.title, "Grand Exchange")
+
+    def test_login(self):
+        print("creatingLogging")
+        driver = self.driver
+        driver.get("http://web:8000/create/user")
+        driver.find_element_by_name('name').send_keys('Eric')
+        driver.find_element_by_name('email').send_keys('eriche2000@gmail.com')
+        driver.find_element_by_name('age').send_keys('21')
+        driver.find_element_by_name('username').send_keys('12345')
+        driver.find_element_by_name('password').send_keys('54321')
+        driver.find_element_by_name("login_button").click()
+        driver.implicitly_wait(20)
+        driver.find_element_by_name('username').send_keys('12345')
+        driver.find_element_by_name('password').send_keys('54321')
+        driver.find_element_by_name("login_button").click()
+
+
+        self.assertTrue("Logout" in driver.page_source)
     '''
     def setUp(self):
         self.driver = webdriver.Remote(
