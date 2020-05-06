@@ -45,7 +45,7 @@ class BasicWebTestCase(unittest.TestCase):
 
 
         self.assertTrue("Logout" in driver.page_source)
-
+    '''
     def test_listing(self):
         print("creatingLogging")
         driver = self.driver
@@ -59,7 +59,7 @@ class BasicWebTestCase(unittest.TestCase):
         driver.find_element_by_xpath("//input[@type='submit'][@value='OK']").click()
         driver.implicitly_wait(20)
         self.assertTrue("Recommendations" in driver.page_source)
-    '''
+    
     def setUp(self):
         self.driver = webdriver.Remote(
             command_executor='http://selenium-chrome:4444/wd/hub',
