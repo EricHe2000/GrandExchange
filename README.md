@@ -2,7 +2,12 @@
 
 > This project is based on  <a href="https://github.com/thomaspinckney3/cs4501">CS 4260 (Internet Scale Application)</a> course. This project is a three tier microservice Django Web Application. Layer 1: Models API, Layer 2: Service API, Layer 3: Web API. 
 
-> The Grand Exchange (abbreviated as GE) is a trading system for players to buy and sell almost all tradeable items.
+> The Grand Exchange Marketplace is a trading system for players to buy and sell all tradeable items. 
+
+## Members of the Team
+- Eric He 
+- Dustin Nguyen
+- Edward Cheng
 
 ## Installation
 
